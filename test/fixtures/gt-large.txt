@@ -1,0 +1,79 @@
+root[2]
+├─0 heading[1]
+│   │ depth: 2
+│   └─0 text "Large Grid Table"
+└─1 gridTable[2]
+    ├─0 gtHeader[1]
+    │   └─0 gtRow[3]
+    │       ├─0 gtCell[1]
+    │       │   └─0 paragraph[1]
+    │       │       └─0 text "A1"
+    │       ├─1 gtCell[1]
+    │       │   └─0 paragraph[1]
+    │       │       └─0 text "B1"
+    │       └─2 gtCell[1]
+    │           └─0 heading[1]
+    │               │ depth: 2
+    │               └─0 text "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    └─1 gtBody[2]
+        ├─0 gtRow[3]
+        │   ├─0 gtCell[2]
+        │   │   ├─0 heading[1]
+        │   │   │   │ depth: 2
+        │   │   │   └─0 text "My Heading 1"
+        │   │   └─1 paragraph[9]
+        │   │       ├─0 image
+        │   │       │     title: null
+        │   │       │     url: "https://hlx.blob.core.windows.net/external/19c0cf25413106c81920d75078ee2ef30a55d52e7"
+        │   │       │     alt: ""
+        │   │       ├─1 break
+        │   │       ├─2 text "Lorem ipsum dolor "
+        │   │       ├─3 strong[1]
+        │   │       │   └─0 text "sit amet"
+        │   │       ├─4 text ", consectetur adipiscing elit. Vivamus rhoncus elit nibh,\nsed vestibulum metus tincidunt a. "
+        │   │       ├─5 emphasis[1]
+        │   │       │   └─0 text "Integer"
+        │   │       ├─6 text " interdum tempus consectetur. Phasellus\ntristique auctor tortor, tincidunt semper odio blandit eu. Proin et aliquet est. Curabitur\nac augue ornare, iaculis sem luctus, feugiat tellus."
+        │   │       ├─7 break
+        │   │       └─8 text "0 1 2 3 4 5 6 7 8 9 0 a b c d e f 0 1 2 3 4 5 6 7 8 9 0 a b c d e f"
+        │   ├─1 gtCell[1]
+        │   │   └─0 code "for (const row of this.rows) {\n  for (let i = 0; i < row.length; i += 1) {\n    let col = cols[i];\n    if (!col) {\n      col = {};\n      cols.push(col);\n    }\n    const cell = row[i];\n    if (cell.value) {\n      col.size = Math.max(col.size || 0, cell.value.length);\n    }\n  }\n}"
+        │   │         lang: "js"
+        │   │         meta: null
+        │   └─2 gtCell[2]
+        │       ├─0 blockquote[2]
+        │       │   ├─0 paragraph[1]
+        │       │   │   └─0 text "My quote"
+        │       │   └─1 paragraph[1]
+        │       │       └─0 text "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nVivamus rhoncus elit nibh, sed vestibulum metus tincidunt\na."
+        │       └─1 list[3]
+        │           │ ordered: false
+        │           │ start: null
+        │           │ spread: false
+        │           ├─0 listItem[1]
+        │           │   │ spread: false
+        │           │   │ checked: null
+        │           │   └─0 paragraph[1]
+        │           │       └─0 text "item one"
+        │           ├─1 listItem[1]
+        │           │   │ spread: false
+        │           │   │ checked: null
+        │           │   └─0 paragraph[1]
+        │           │       └─0 text "item two"
+        │           └─2 listItem[1]
+        │               │ spread: false
+        │               │ checked: null
+        │               └─0 paragraph[1]
+        │                   └─0 text "Lorem ipsum dolor sit amet, consectetur adipiscing\nelit. Vivamus rhoncus elit nibh, sed vestibulum metus\ntincidunt a."
+        └─1 gtRow[3]
+            ├─0 gtCell[1]
+            │   └─0 paragraph[1]
+            │       └─0 text "a3"
+            ├─1 gtCell[1]
+            │   └─0 paragraph[1]
+            │       └─0 text "b3"
+            └─2 gtCell[1]
+                └─0 paragraph[2]
+                    ├─0 strong[1]
+                    │   └─0 text "30 Years."
+                    └─1 text " That's a lot."
