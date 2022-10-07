@@ -9,12 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
-/**
- * This is the main function
- * @param {string} name name of the person to greet
- * @returns {string} a greeting
- */
-export function main(name = 'world') {
-  return `Hello, ${name}.`;
-}
+export * from './types.js';
+export { gridTablesFromMarkdown } from './from-markdown.js';
+export { gridTablesToMarkdown } from './to-markdown.js';
+export { default as mdast2HastGridTablesHandler } from './mdast2hast-handler.js';

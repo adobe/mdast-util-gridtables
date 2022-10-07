@@ -1,0 +1,48 @@
+root[2]
+├─0 heading[1]
+│   │ depth: 2
+│   └─0 text "Simple Grid Table"
+└─1 gridTable[3]
+    ├─0 gtHeader[1]
+    │   └─0 gtRow[3]
+    │       ├─0 gtCell[1]
+    │       │   └─0 paragraph[1]
+    │       │       └─0 text "A1"
+    │       ├─1 gtCell[1]
+    │       │   └─0 paragraph[1]
+    │       │       └─0 text "B1"
+    │       └─2 gtCell[1]
+    │           └─0 paragraph[1]
+    │               └─0 text "C1"
+    ├─1 gtBody[2]
+    │   ├─0 gtRow[3]
+    │   │   ├─0 gtCell[1]
+    │   │   │   └─0 paragraph[1]
+    │   │   │       └─0 text "a2"
+    │   │   ├─1 gtCell[1]
+    │   │   │   └─0 paragraph[1]
+    │   │   │       └─0 text "b2"
+    │   │   └─2 gtCell[1]
+    │   │       └─0 paragraph[1]
+    │   │           └─0 text "c2"
+    │   └─1 gtRow[3]
+    │       ├─0 gtCell[1]
+    │       │   └─0 paragraph[1]
+    │       │       └─0 text "a3"
+    │       ├─1 gtCell[1]
+    │       │   └─0 paragraph[1]
+    │       │       └─0 text "b3"
+    │       └─2 gtCell[1]
+    │           └─0 paragraph[1]
+    │               └─0 text "c3"
+    └─2 gtFooter[1]
+        └─0 gtRow[3]
+            ├─0 gtCell[1]
+            │   └─0 paragraph[1]
+            │       └─0 text "af"
+            ├─1 gtCell[1]
+            │   └─0 paragraph[1]
+            │       └─0 text "bf"
+            └─2 gtCell[1]
+                └─0 paragraph[1]
+                    └─0 text "cf"

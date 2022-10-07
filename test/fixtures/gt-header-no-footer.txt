@@ -1,0 +1,53 @@
+root[4]
+├─0 heading[1]
+│   │ depth: 2
+│   └─0 text "Grid Table no footer"
+├─1 gridTable[2]
+│   ├─0 gtHeader[1]
+│   │   └─0 gtRow[3]
+│   │       ├─0 gtCell[1]
+│   │       │   └─0 paragraph[1]
+│   │       │       └─0 text "A1"
+│   │       ├─1 gtCell[1]
+│   │       │   └─0 paragraph[1]
+│   │       │       └─0 text "B1"
+│   │       └─2 gtCell[1]
+│   │           └─0 paragraph[1]
+│   │               └─0 text "C1"
+│   └─1 gtBody[2]
+│       ├─0 gtRow[3]
+│       │   ├─0 gtCell[1]
+│       │   │   └─0 paragraph[1]
+│       │   │       └─0 text "a2"
+│       │   ├─1 gtCell[1]
+│       │   │   └─0 paragraph[1]
+│       │   │       └─0 text "b2"
+│       │   └─2 gtCell[1]
+│       │       └─0 paragraph[1]
+│       │           └─0 text "c2"
+│       └─1 gtRow[3]
+│           ├─0 gtCell[1]
+│           │   └─0 paragraph[1]
+│           │       └─0 text "a3"
+│           ├─1 gtCell[1]
+│           │   └─0 paragraph[1]
+│           │       └─0 text "b3"
+│           └─2 gtCell[1]
+│               └─0 paragraph[1]
+│                   └─0 text "c3"
+├─2 heading[1]
+│   │ depth: 2
+│   └─0 text "Grid Table only header"
+└─3 gridTable[2]
+    ├─0 gtHeader[1]
+    │   └─0 gtRow[3]
+    │       ├─0 gtCell[1]
+    │       │   └─0 paragraph[1]
+    │       │       └─0 text "A1"
+    │       ├─1 gtCell[1]
+    │       │   └─0 paragraph[1]
+    │       │       └─0 text "B1"
+    │       └─2 gtCell[1]
+    │           └─0 paragraph[1]
+    │               └─0 text "C1"
+    └─1 gtBody[0]
