@@ -13,24 +13,22 @@ Adobe Stock Senior Director, Content, Sarah Casillas echoes Rivas’ sentiments.
 | \                                                                                                                   |
 | Adobe Stock Senior Director, Content, Sarah Casillas echoes Rivas’ sentiments.                                      |
 +----------------------------------------------------------+----------------------------------------------------------+
-| Test with trailing <br>                                  | ## Educational environments                              |
+| Test with trailing \<br>                                 | ## Educational environments                              |
 |                                                          |                                                          |
 |                                                          | -   Aerial images of college campuses and towns;         |
 |                                                          |     landscape of surrounding areas.                      |
 |                                                          | -   Specialized fields of study with contextual cues:    |
-|                                                          |     law, medicine, technology, social sciences\          |
+|                                                          |     law, medicine, technology, social sciences           |
 +----------------------------------------------------------+----------------------------------------------------------+
-| Test with multiple <br>s                                 | Specialized fields of study with contextual cues: law,   |
-|                                                          | medicine, technology, social sciences\                   |
-|                                                          | \                                                        |
-|                                                          | \                                                        |
+| Test with multiple \<br>s                                | Specialized fields of study with contextual cues: law,   |
+|                                                          | medicine, technology, social sciences                    |
 +----------------------------------------------------------+----------------------------------------------------------+
 | Test with non-lf escape                                  | Specialized fields of study with contextual cues: law,   |
 |                                                          | medicine, technology, social sciences\\                  |
 +----------------------------------------------------------+----------------------------------------------------------+
-| Test with a single break                                 | \                                                        |
+| Test with a single break                                 |                                                          |
 +----------------------------------------------------------+----------------------------------------------------------+
-| Test with a break after image                            | ![][image0]\                                             |
+| Test with a break after image                            | ![][image0]                                              |
 +----------------------------------------------------------+----------------------------------------------------------+
 | Test with image with newline in alt text                 | ![hello alt text.][image1]                               |
 +----------------------------------------------------------+----------------------------------------------------------+

@@ -22,7 +22,7 @@ import rehypeFormat from 'rehype-format';
 import { toHast as mdast2hast } from 'mdast-util-to-hast';
 import { toHtml as hast2html } from 'hast-util-to-html';
 
-import { gridTableToMarkdown, gridTablesFromMarkdown, mdast2HastGridTablesHandler } from '../src/index.js';
+import { gridTablesToMarkdown, gridTablesFromMarkdown, mdast2HastGridTablesHandler } from '../src/index.js';
 
 export function removePositions(tree) {
   visit(tree, (node) => {
@@ -50,7 +50,7 @@ export function mdast2md(mdast) {
     ruleRepetition: 3,
     ruleSpaces: false,
     setext: false,
-    extensions: [gridTableToMarkdown()],
+    extensions: [gridTablesToMarkdown()],
   });
 }
 
@@ -128,7 +128,6 @@ export async function testMD2HTML(spec, mdast) {
     handlers: {
       [TYPE_TABLE]: mdast2HastGridTablesHandler(),
     },
-    allowDangerousHtml: true,
   });
 
   // make html

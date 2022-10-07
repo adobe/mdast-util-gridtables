@@ -16,6 +16,7 @@ import { code } from 'mdast-util-to-markdown/lib/handle/code.js';
 import {
   TYPE_BODY, TYPE_CELL, TYPE_HEADER, TYPE_FOOTER, TYPE_ROW, TYPE_TABLE,
 } from './types.js';
+import sanitizeBreaks from './mdast-clean-breaks.js';
 
 function* distribute(size, times) {
   const delta = size / times;
@@ -138,6 +139,10 @@ class Table {
 
     // enter cell construct in order to escape unsafe characters
     const exit = context.enter(TYPE_CELL);
+    const subexit = context.enter('phrasing');
+
+    // should probably create a clone and not alter the original mdast
+    sanitizeBreaks(cell.tree);
 
     cell.value = context.handle(cell.tree, null, context, {
       before: '\n',
@@ -146,20 +151,12 @@ class Table {
       lineShift: 0,
     });
 
+    subexit();
     exit();
 
     context.options.lineWidth = oldWidth;
     // calculate actual width and height of cell
     const lines = cell.value.split('\n');
-    // trim leading empty cells
-    while (lines.length > 1 && lines[0].match(/^\s*$/)) {
-      lines.shift();
-    }
-    // trim trailing empty cells
-    while (lines.length > 1 && lines[lines.length - 1].match(/^\s*$/)) {
-      lines.pop();
-    }
-
     cell.lines = lines;
     cell.height = lines.length;
     cell.width = 0;
@@ -550,7 +547,7 @@ function inlineCodeWithTable(node, parent, context) {
   return value;
 }
 
-export function gridTableToMarkdown() {
+export function gridTablesToMarkdown() {
   return {
     unsafe: [
       // A pipe or a + in a cell must be encoded.

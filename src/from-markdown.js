@@ -77,11 +77,12 @@ function createExitTable(options) {
     processor = {
       data(key) {
         if (key === 'micromarkExtensions') {
-          return options.extensions || [];
+          return options.extensions;
         }
         if (key === 'fromMarkdownExtensions') {
-          return options.mdastExtensions || [];
+          return options.mdastExtensions;
         }
+        /* c8 ignore next */
         return undefined;
       },
     };
@@ -96,8 +97,9 @@ function createExitTable(options) {
         align, valign,
       } = cell;
 
-      // add fake definitions...
       const sanitizedLines = multiline(lines);
+
+      // add fake definitions from the main document
       for (const def of info.definitions) {
         sanitizedLines.push('');
         sanitizedLines.push(`[${def}]: dummy`);
