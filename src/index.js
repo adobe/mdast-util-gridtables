@@ -12,4 +12,4 @@
 export * from './types.js';
 export { gridTablesFromMarkdown } from './from-markdown.js';
 export { gridTablesToMarkdown } from './to-markdown.js';
-export { default as mdast2HastGridTablesHandler } from './mdast2hast-handler.js';
+export { default as mdast2hastGridTablesHandler } from './mdast2hast-handler.js';
