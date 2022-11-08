@@ -671,6 +671,33 @@ describe('gridtable to md', () => {
     await assertMD(mdast, 'gt-with-breaks.md');
   });
 
+  it('table with list start', async () => {
+    const mdast = root([
+      heading(2, text('Wrong List start')),
+      gridTable([
+        gtBody([
+          gtRow([
+            gtCell(text('Column 1')),
+            gtCell(text('Column 2')),
+          ]),
+          gtRow([
+            gtCell(text('This is cool')),
+            gtCell([
+              heading(1, text('Welcome')),
+              paragraph(text('Here an ordered list:')),
+              list('ordered', [
+                listItem(text('item 1')),
+                listItem(text('item 2')),
+              ]),
+              paragraph(text('Lorem ipsum dolor sit amet, consectetur adipiscing elit 2020. Vivamus rhoncus elit nibh, sed vestibulum metus tincidunt a.')),
+            ]),
+          ]),
+        ]),
+      ]),
+    ]);
+    await assertMD(mdast, 'gt-with-list-start.md');
+  });
+
   /**
    * spot test for edge cases detected in production. disabled by default.
    * for debugging, create a broken.json of the mdast and a broken.md

@@ -54,12 +54,16 @@ export function lineWrapTextHandler(node, parent, context, safeOptions) {
     const words = value.split(' ');
     let len = safeOptions.now.column - 1;
     let line = [];
-    for (const word of words) {
+    for (let word of words) {
       const wordLen = word.length;
       if (len + wordLen > lineWidth && line.length > 0) {
         lines.push(line.join(' '));
         line = [];
         len = 0;
+      }
+      // escape line starts that looks like a ordered list start
+      if (line.length === 0 && word.match(/\d+\./)) {
+        word = word.replace('.', '\\.');
       }
       line.push(word);
       len += wordLen + 1;
