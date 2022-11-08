@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/adobe/mdast-util-gridtables/compare/v1.0.1...v1.0.2) (2022-11-08)
+
+
+### Bug Fixes
+
+* escape potential ordered list starters in text ([d4a4c2a](https://github.com/adobe/mdast-util-gridtables/commit/d4a4c2a363d5a7c96564b0e0a418bfbc0000bd2a))
+
 ## [1.0.1](https://github.com/adobe/mdast-util-gridtables/compare/v1.0.0...v1.0.1) (2022-11-03)
 
 
