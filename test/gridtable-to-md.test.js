@@ -689,7 +689,7 @@ describe('gridtable to md', () => {
                 listItem(text('item 1')),
                 listItem(text('item 2')),
               ]),
-              paragraph(text('Lorem ipsum dolor sit amet, consectetur adipiscing elit 2020. Vivamus rhoncus elit nibh, sed vestibulum metus tincidunt a.')),
+              paragraph(text('Lorem ipsum dolor sit amet, consectetur adipiscing elit 2020. Vivamus rhoncus elit nibh, sed vestibulum metus tincidunt-990.')),
             ]),
           ]),
         ]),
