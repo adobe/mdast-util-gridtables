@@ -62,7 +62,7 @@ export function lineWrapTextHandler(node, parent, context, safeOptions) {
         len = 0;
       }
       // escape the dot if the line-start looks like an ordered list
-      if (line.length === 0 && word.match(/\d+\./)) {
+      if (line.length === 0 && word.match(/^\d+\./)) {
         word = word.replace('.', '\\.');
       }
       line.push(word);
