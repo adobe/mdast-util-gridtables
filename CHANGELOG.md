@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/adobe/mdast-util-gridtables/compare/v1.0.2...v1.0.3) (2022-11-09)
+
+
+### Bug Fixes
+
+* only match leading digits ([#8](https://github.com/adobe/mdast-util-gridtables/issues/8)) ([dc90086](https://github.com/adobe/mdast-util-gridtables/commit/dc90086d39ea08f9137f45b596dba5683ae33950))
+
 ## [1.0.2](https://github.com/adobe/mdast-util-gridtables/compare/v1.0.1...v1.0.2) (2022-11-08)
 
 
