@@ -50,7 +50,7 @@ import { gridTables } from '@adobe/micromark-extension-gridtables'
 import { 
   gridTablesToMarkdown, 
   gridTablesFromMarkdown, 
-  mdast2HastGridTablesHandler,
+  mdast2hastGridTablesHandler,
   TYPE_TABLE,
 } from '@adobe/mdast-util-gridtables';
 
@@ -70,7 +70,7 @@ const outputMarkdown = toMarkdown(tree, {extensions: [gridTablesToMarkdown()]})
 // convert mdast to hast
 const hast = mdast2hast(mdast, {
   handlers: {
-    [TYPE_TABLE]: mdast2HastGridTablesHandler(),
+    [TYPE_TABLE]: mdast2hastGridTablesHandler(),
   },
 });
 ```
