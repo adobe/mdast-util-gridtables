@@ -10,13 +10,17 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-disable no-unused-vars,no-param-reassign */
-import { text as textHandler } from 'mdast-util-to-markdown/lib/handle/text.js';
-import { inlineCode } from 'mdast-util-to-markdown/lib/handle/inline-code.js';
-import { code } from 'mdast-util-to-markdown/lib/handle/code.js';
+import { defaultHandlers } from 'mdast-util-to-markdown';
 import {
   TYPE_BODY, TYPE_CELL, TYPE_HEADER, TYPE_FOOTER, TYPE_ROW, TYPE_TABLE,
 } from './types.js';
 import sanitizeBreaks from './mdast-clean-breaks.js';
+
+const {
+  text: textHandler,
+  inlineCode,
+  code,
+} = defaultHandlers;
 
 function* distribute(size, times) {
   const delta = size / times;
@@ -133,22 +137,22 @@ class Table {
     }
   }
 
-  renderCell(cell, context, maxWidth) {
+  renderCell(cell, state, maxWidth) {
     // set line wrap to width
-    const oldWidth = context.options.lineWidth;
+    const oldWidth = state.options.lineWidth;
     // it's easier to calculate in the padding (+2) and border (+1) here than everywhere else.
     // so the column width is equal to the cell.width
-    context.options.lineWidth = maxWidth - 3;
-    context.options.minLineWidth = this.opts.minCellWidth;
+    state.options.lineWidth = maxWidth - 3;
+    state.options.minLineWidth = this.opts.minCellWidth;
 
     // enter cell construct in order to escape unsafe characters
-    const exit = context.enter(TYPE_CELL);
-    const subexit = context.enter('phrasing');
+    const exit = state.enter(TYPE_CELL);
+    const subexit = state.enter('phrasing');
 
     // should probably create a clone and not alter the original mdast
     sanitizeBreaks(cell.tree);
 
-    cell.value = context.handle(cell.tree, null, context, {
+    cell.value = state.containerFlow(cell.tree, {
       before: '\n',
       after: '\n',
       now: { line: 1, column: 1 },
@@ -158,7 +162,7 @@ class Table {
     subexit();
     exit();
 
-    context.options.lineWidth = oldWidth;
+    state.options.lineWidth = oldWidth;
     // calculate actual width and height of cell
     const lines = cell.value.split('\n');
     cell.lines = lines;
@@ -226,7 +230,7 @@ class Table {
     // add empty cells if needed
     for (const row of this.rows) {
       for (let i = row.cells.length; i < numCols; i += 1) {
-        row.cells.push({ tree: { type: 'root' }, colSpan: 1, rowSpan: 1 });
+        row.cells.push({ tree: { type: 'root', children: [] }, colSpan: 1, rowSpan: 1 });
       }
     }
 
