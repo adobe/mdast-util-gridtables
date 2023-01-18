@@ -221,6 +221,9 @@ class Table {
       }
     }
 
+    // stop processing if no columns found
+    if (cols.length === 0) return '';
+
     const numCols = cols.length;
 
     // add empty cells if needed
@@ -230,11 +233,9 @@ class Table {
       }
     }
 
-    if (numCols > 0) {
-      // populate the columns with default max widths
-      for (const [d, idx] of distribute(this.opts.width, numCols)) {
-        cols[idx].maxWidth = d;
-      }
+    // populate the columns with default max widths
+    for (const [d, idx] of distribute(this.opts.width, numCols)) {
+      cols[idx].maxWidth = d;
     }
 
     // render cells

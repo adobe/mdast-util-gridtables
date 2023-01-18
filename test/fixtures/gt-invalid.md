@@ -1,3 +1,2 @@
 ## Invalid Grid Table
 
-+
