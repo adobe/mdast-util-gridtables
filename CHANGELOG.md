@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/adobe/mdast-util-gridtables/compare/v1.0.4...v1.0.5) (2023-01-18)
+
+
+### Bug Fixes
+
+* invalid table crashes the toMarkdown conversion bug ([#23](https://github.com/adobe/mdast-util-gridtables/issues/23)) ([18c8239](https://github.com/adobe/mdast-util-gridtables/commit/18c82393fa49a459f66a66e465d142b7e8550b70))
+
 ## [1.0.4](https://github.com/adobe/mdast-util-gridtables/compare/v1.0.3...v1.0.4) (2023-01-18)
 
 
