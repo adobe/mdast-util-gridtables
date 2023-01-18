@@ -230,9 +230,11 @@ class Table {
       }
     }
 
-    // populate the columns with default max widths
-    for (const [d, idx] of distribute(this.opts.width, numCols)) {
-      cols[idx].maxWidth = d;
+    if (numCols > 0) {
+      // populate the columns with default max widths
+      for (const [d, idx] of distribute(this.opts.width, numCols)) {
+        cols[idx].maxWidth = d;
+      }
     }
 
     // render cells
