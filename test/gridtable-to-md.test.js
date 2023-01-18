@@ -171,6 +171,22 @@ describe('gridtable to md', () => {
     await assertMD(mdast, 'gt-simple.md');
   });
 
+  it('invalid table - empty table', async () => {
+    const mdast = root([
+      heading(2, text('Invalid Grid Table')),
+      gridTable(),
+    ]);
+    await assertMD(mdast, 'gt-invalid.md');
+  });
+
+  it('invalid table - empty row', async () => {
+    const mdast = root([
+      heading(2, text('Invalid Grid Table')),
+      gridTable([]),
+    ]);
+    await assertMD(mdast, 'gt-invalid.md');
+  });
+
   it('footer but no header table', async () => {
     const mdast = root([
       heading(2, text('Grid Table no header')),
