@@ -222,7 +222,9 @@ class Table {
     }
 
     // stop processing if no columns found
-    if (cols.length === 0) return '';
+    if (cols.length === 0) {
+      return '';
+    }
 
     const numCols = cols.length;
 
