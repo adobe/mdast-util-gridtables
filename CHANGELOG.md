@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/adobe/mdast-util-gridtables/compare/v1.0.3...v1.0.4) (2023-01-18)
+
+
+### Bug Fixes
+
+* migrate to mdast-util-to-markdown 1.5 ([ead602c](https://github.com/adobe/mdast-util-gridtables/commit/ead602cf80cc4c94e86cf77fc320024cbfb1bccf))
+
 ## [1.0.3](https://github.com/adobe/mdast-util-gridtables/compare/v1.0.2...v1.0.3) (2022-11-09)
 
 
