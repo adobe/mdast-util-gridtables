@@ -61,7 +61,7 @@ const options = {
   extensions: [gridTables],
   mdastExtensions: [],
 };
-options.mdastExtensions.push(gridTablesToMarkdown(options));
+options.mdastExtensions.push(gridTablesFromMarkdown(options));
 const tree = fromMarkdown(sourceMarkdown, options);
 
 // convert mdast to md
@@ -74,6 +74,8 @@ const hast = mdast2hast(mdast, {
   },
 });
 ```
+
+Also see a working [example](/example/index.js).
 
 ## Overview
 
