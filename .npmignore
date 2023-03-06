@@ -12,6 +12,7 @@
 .nycrc.json
 .releaserc.cjs
 .renovaterc.json
+example/
 coverage
 junit
 node_modules/
