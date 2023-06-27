@@ -60,4 +60,8 @@ describe('gridtable from markdown', () => {
   it('text with breaks', async () => {
     await testMD('gt-with-breaks');
   });
+
+  it('text with many refs', async () => {
+    await testMD('gt-many-refs');
+  });
 });
