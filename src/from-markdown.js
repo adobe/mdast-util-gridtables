@@ -100,9 +100,14 @@ function createExitTable(options) {
       const sanitizedLines = multiline(lines);
 
       // add fake definitions from the main document
+      const fakeDefs = new Set();
       for (const def of info.definitions) {
-        sanitizedLines.push('');
-        sanitizedLines.push(`[${def}]: dummy`);
+        const key = `[${def.toLowerCase()}]`;
+        if (lines.find((line) => line.indexOf(key) >= 0)) {
+          sanitizedLines.push('');
+          sanitizedLines.push(`[${def}]: dummy`);
+          fakeDefs.add(def);
+        }
       }
       const cellContent = sanitizedLines.join('\n');
 
@@ -114,7 +119,7 @@ function createExitTable(options) {
       // remove previously added definitions
       for (let i = 0; i < tree.children.length; i += 1) {
         const child = tree.children[i];
-        if (child.type === 'definition' && info.definitions.includes(child.label)) {
+        if (child.type === 'definition' && fakeDefs.has(child.label)) {
           tree.children.splice(i, 1);
           i -= 1;
         }
