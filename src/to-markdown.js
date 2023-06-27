@@ -152,25 +152,43 @@ class Table {
     // should probably create a clone and not alter the original mdast
     sanitizeBreaks(cell.tree);
 
-    cell.value = state.containerFlow(cell.tree, {
+    const lines = state.containerFlow(cell.tree, {
       before: '\n',
       after: '\n',
       now: { line: 1, column: 1 },
       lineShift: 0,
-    });
+    }).split('\n');
 
     subexit();
     exit();
 
     state.options.lineWidth = oldWidth;
-    // calculate actual width and height of cell
-    const lines = cell.value.split('\n');
     cell.lines = lines;
     cell.height = lines.length;
     cell.width = 0;
-    for (const line of lines) {
+
+    // calculate actual width and height of cell and transform the tab stops correctly
+    const TABS = [
+      '    ',
+      '   ',
+      '  ',
+      ' ',
+    ];
+    for (let i = 0; i < lines.length; i += 1) {
+      let line = lines[i];
+      let idx = line.indexOf('\t');
+      if (idx >= 0) {
+        do {
+          // adjust tabstops
+          line = line.substring(0, idx) + TABS[idx % 4] + line.substring(idx + 1);
+          idx = line.indexOf('\t', idx + 1);
+        } while (idx >= 0);
+        lines[i] = line;
+      }
       cell.width = Math.max(cell.width, line.length);
     }
+
+    cell.value = lines.join('\n');
     cell.width += 3;
     return cell;
   }

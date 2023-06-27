@@ -687,6 +687,28 @@ describe('gridtable to md', () => {
     await assertMD(mdast, 'gt-with-breaks.md');
   });
 
+  it('code with tabs', async () => {
+    const mdast = root([
+      heading(2, text('Code with tabs')),
+      gridTable([
+        gtRow([
+          gtCell(text('Code Listing')),
+        ]),
+        gtRow([
+          gtCell(code('js', `
+>a = 1;
+>\tb = 2;
+> \tc = 3;
+>   \t d = 4;
+>    \t e = 5;
+>\t\t f = 6;
+`)),
+        ]),
+      ]),
+    ]);
+    await assertMD(mdast, 'gt-with-tabs.md');
+  });
+
   it('table with list start', async () => {
     const mdast = root([
       heading(2, text('Wrong List start')),
