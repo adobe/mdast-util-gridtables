@@ -1,3 +1,10 @@
+## [1.0.9](https://github.com/adobe/mdast-util-gridtables/compare/v1.0.8...v1.0.9) (2023-06-27)
+
+
+### Bug Fixes
+
+* convert tabstops correctly ([#55](https://github.com/adobe/mdast-util-gridtables/issues/55)) ([78c17a8](https://github.com/adobe/mdast-util-gridtables/commit/78c17a87689de0b7cb50ea02932c1999928d0c49))
+
 ## [1.0.8](https://github.com/adobe/mdast-util-gridtables/compare/v1.0.7...v1.0.8) (2023-06-27)
 
 
