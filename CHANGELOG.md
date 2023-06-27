@@ -1,3 +1,10 @@
+## [1.0.7](https://github.com/adobe/mdast-util-gridtables/compare/v1.0.6...v1.0.7) (2023-06-27)
+
+
+### Bug Fixes
+
+* improve mdast creating with many image refs ([#54](https://github.com/adobe/mdast-util-gridtables/issues/54)) ([105fa03](https://github.com/adobe/mdast-util-gridtables/commit/105fa03db858ae6fe1eabff2bb389ec6793a31e8)), closes [#53](https://github.com/adobe/mdast-util-gridtables/issues/53)
+
 ## [1.0.6](https://github.com/adobe/mdast-util-gridtables/compare/v1.0.5...v1.0.6) (2023-01-28)
 
 
