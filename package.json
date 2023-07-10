@@ -33,11 +33,11 @@
     "reporter-options": "configFile=.mocha-multi.json"
   },
   "dependencies": {
-    "@adobe/micromark-extension-gridtables": "^1.0.4",
-    "mdast-util-from-markdown": "1.3.1",
+    "@adobe/micromark-extension-gridtables": "^2.0.0",
+    "mdast-util-from-markdown": "2.0.0",
     "mdast-util-to-hast": "12.3.0",
     "mdast-util-to-markdown": "1.5.0",
-    "unist-util-visit": "4.1.2"
+    "unist-util-visit": "5.0.0"
   },
   "devDependencies": {
     "@semantic-release/changelog": "6.0.3",
@@ -58,7 +58,7 @@
     "mocha-multi-reporters": "1.5.1",
     "rehype-format": "4.0.1",
     "semantic-release": "21.0.7",
-    "unist-util-inspect": "7.0.2"
+    "unist-util-inspect": "8.0.0"
   },
   "lint-staged": {
     "*.js": "eslint",
