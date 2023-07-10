@@ -64,7 +64,7 @@ root[2]
         │               │ spread: false
         │               │ checked: null
         │               └─0 paragraph[1]
-        │                   └─0 text "Lorem ipsum dolor sit amet, consectetur adipiscing\nelit. Vivamus rhoncus elit nibh, sed vestibulum metus\ntincidunt a."
+        │                   └─0 text "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nVivamus rhoncus elit nibh, sed vestibulum metus tincidunt\na."
         └─1 gtRow[3]
             ├─0 gtCell[1]
             │   └─0 paragraph[1]

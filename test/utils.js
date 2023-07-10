@@ -40,16 +40,9 @@ export function removePositions(tree) {
  */
 export function mdast2md(mdast) {
   return toMarkdown(mdast, {
-    strong: '*',
     emphasis: '_',
     bullet: '-',
-    fence: '`',
-    fences: true,
-    incrementListMarker: true,
     rule: '-',
-    ruleRepetition: 3,
-    ruleSpaces: false,
-    setext: false,
     extensions: [gridTablesToMarkdown()],
   });
 }
