@@ -52,7 +52,7 @@ function getColSpan(info, token) {
 
 function enterTable(token) {
   this.enter({ type: TYPE_TABLE, children: [] }, token);
-  this.setData('tableInfo', {
+  this.data.tableInfo = {
     // the column positions of the table
     cols: token._cols,
     // the current column
@@ -67,7 +67,7 @@ function enterTable(token) {
     dividers: [],
     // the link/image reference definitions
     definitions: token._definitions,
-  });
+  };
 }
 
 function createExitTable(options) {
@@ -90,8 +90,8 @@ function createExitTable(options) {
 
   return function exitTable(token) {
     // render cells
-    const info = this.getData('tableInfo');
-    for (const cell of info.allCells) {
+    const { tableInfo } = this.data;
+    for (const cell of tableInfo.allCells) {
       const {
         node, lines, colSpan, rowSpan,
         align, valign,
@@ -101,7 +101,7 @@ function createExitTable(options) {
 
       // add fake definitions from the main document
       const fakeDefs = new Set();
-      for (const def of info.definitions) {
+      for (const def of tableInfo.definitions) {
         const key = `[${def.toLowerCase()}]`;
         if (lines.find((line) => line.indexOf(key) >= 0)) {
           sanitizedLines.push('');
@@ -158,16 +158,16 @@ function exitCell(token) {
   this.config.enter.data.call(this, token);
   this.config.exit.data.call(this, token);
   const data = this.resume();
-  const info = this.getData('tableInfo');
-  const colSpan = getColSpan(info, token);
+  const { tableInfo } = this.data;
+  const colSpan = getColSpan(tableInfo, token);
 
-  let cell = info.pendingCells[info.colPos];
+  let cell = tableInfo.pendingCells[tableInfo.colPos];
 
   // open rowspan if we are on a divider line
-  if (info.isDivider) {
+  if (tableInfo.isDivider) {
     if (!cell) {
-      cell = info.cells[info.colPos];
-      info.pendingCells[info.colPos] = cell;
+      cell = tableInfo.cells[tableInfo.colPos];
+      tableInfo.pendingCells[tableInfo.colPos] = cell;
     }
     if (!cell) {
       // throw Error('no matching rowspan');
@@ -179,14 +179,14 @@ function exitCell(token) {
   // if a rowspan is open, append to its cell
   if (cell) {
     cell.lines.push(data);
-    info.colPos += colSpan;
+    tableInfo.colPos += colSpan;
     return;
   }
 
   // otherwise append to regular cell
-  cell = info.cells[info.colPos];
+  cell = tableInfo.cells[tableInfo.colPos];
   if (!cell) {
-    const div = info.dividers[info.colPos];
+    const div = tableInfo.dividers[tableInfo.colPos];
     cell = {
       rowSpan: 1,
       colSpan,
@@ -197,27 +197,27 @@ function exitCell(token) {
       },
       lines: [],
     };
-    info.cells[info.colPos] = cell;
-    info.allCells.push(cell);
+    tableInfo.cells[tableInfo.colPos] = cell;
+    tableInfo.allCells.push(cell);
   }
   cell.lines.push(data);
-  info.colPos += colSpan;
+  tableInfo.colPos += colSpan;
 }
 
 function enterGridDivider(token) {
-  const info = this.getData('tableInfo');
+  const { tableInfo } = this.data;
   // clear pending rowspans and set divider info
-  let colSpan = getColSpan(info, token);
+  let colSpan = getColSpan(tableInfo, token);
   while (colSpan > 0) {
     colSpan -= 1;
-    info.pendingCells[info.colPos] = null;
-    info.dividers[info.colPos] = token;
-    info.colPos += 1;
+    tableInfo.pendingCells[tableInfo.colPos] = null;
+    tableInfo.dividers[tableInfo.colPos] = token;
+    tableInfo.colPos += 1;
   }
 }
 
 function enterRowLine(token) {
-  const info = this.getData('tableInfo');
+  const info = this.data.tableInfo;
   info.isDivider = token._type;
   info.colPos = 0;
   if (info.isDivider) {
@@ -253,21 +253,21 @@ function commitRow(info) {
 }
 
 function exitHeader(token) {
-  const info = this.getData('tableInfo');
+  const { tableInfo } = this.data;
   // commit row  has some cells
-  if (info.cells.length) {
-    commitRow.call(this, info);
+  if (tableInfo.cells.length) {
+    commitRow.call(this, tableInfo);
     // also close all rowspans.
-    info.pendingCells = [];
+    tableInfo.pendingCells = [];
   }
   this.exit(token);
 }
 
 function exitRowLine() {
-  const info = this.getData('tableInfo');
+  const { tableInfo } = this.data;
   // commit row if on a divider and has some cells
-  if (info.isDivider && info.cells.length) {
-    commitRow.call(this, info);
+  if (tableInfo.isDivider && tableInfo.cells.length) {
+    commitRow.call(this, tableInfo);
   }
 }
 
