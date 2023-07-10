@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/adobe/mdast-util-gridtables/compare/v1.0.9...v2.0.0) (2023-07-10)
+
+
+### Bug Fixes
+
+* **deps:** update external major  ([d42955f](https://github.com/adobe/mdast-util-gridtables/commit/d42955ffbe93e1f012d68807c23872d83749604f))
+
+
+### BREAKING CHANGES
+
+* **deps:** upgrade to micromark 4.x
+
 ## [1.0.9](https://github.com/adobe/mdast-util-gridtables/compare/v1.0.8...v1.0.9) (2023-06-27)
 
 
