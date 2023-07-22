@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/adobe/mdast-util-gridtables/compare/v2.0.1...v2.0.2) (2023-07-22)
+
+
+### Bug Fixes
+
+* **deps:** update dependency mdast-util-to-markdown to v2.1.0 ([#63](https://github.com/adobe/mdast-util-gridtables/issues/63)) ([cb3978e](https://github.com/adobe/mdast-util-gridtables/commit/cb3978ece8c6a314b9aa496f1597eeb56c20ddae))
+
 ## [2.0.1](https://github.com/adobe/mdast-util-gridtables/compare/v2.0.0...v2.0.1) (2023-07-10)
 
 
