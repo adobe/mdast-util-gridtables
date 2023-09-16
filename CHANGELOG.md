@@ -1,3 +1,15 @@
+# [3.0.0](https://github.com/adobe/mdast-util-gridtables/compare/v2.0.2...v3.0.0) (2023-09-16)
+
+
+### Bug Fixes
+
+* **deps:** update external major ([#62](https://github.com/adobe/mdast-util-gridtables/issues/62)) ([df89eb7](https://github.com/adobe/mdast-util-gridtables/commit/df89eb7af506cd827d51ee60b24cc3ef21829e09))
+
+
+### BREAKING CHANGES
+
+* **deps:** mdast-util-to-hast upgrade to 13.x
+
 ## [2.0.2](https://github.com/adobe/mdast-util-gridtables/compare/v2.0.1...v2.0.2) (2023-07-22)
 
 
