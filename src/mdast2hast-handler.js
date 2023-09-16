@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-import { all } from 'mdast-util-to-hast';
 import { CONTINUE, SKIP, visit } from 'unist-util-visit';
 import {
   TYPE_BODY, TYPE_CELL, TYPE_FOOTER, TYPE_HEADER, TYPE_ROW,
@@ -24,21 +23,27 @@ import {
  * Handles a row (i.e. the `gtRow` node)
  * @return {HastNode} the 'tr' node
  */
-function handleRow(h, node, cellElementName) {
+function handleRow(state, node, cellElementName) {
   const cells = [];
   for (const child of node.children) {
     if (child.type === TYPE_CELL) {
-      const props = {};
+      const properties = {};
       for (const p of ['colSpan', 'rowSpan', 'align', 'valign']) {
         if (p in child) {
-          props[p] = child[p];
+          properties[p] = child[p];
         }
       }
       // if cell contains only 1 single paragraph, unwrap it
       if (child.children?.length === 1 && child.children[0].type === 'paragraph') {
         child.children = child.children[0].children;
       }
-      const cell = h(child, cellElementName, props, all(h, child));
+      const cell = {
+        type: 'element',
+        tagName: cellElementName,
+        properties,
+        children: state.all(child),
+      };
+      state.patch(child, cell);
       cells.push(cell);
 
       // clean text elements
@@ -55,18 +60,24 @@ function handleRow(h, node, cellElementName) {
     }
   }
 
-  return h(node, 'tr', cells);
+  const result = /** @type HastNode */ {
+    type: 'element',
+    tagName: 'tr',
+    children: cells,
+  };
+  state.patch(node, result);
+  return result;
 }
 
 /**
  * Handles a group (array) of rows. eg the children of a `gtBody`.
  * @return {HastNode[]} the array of rows
  */
-function createRows(h, node, cellElementName) {
+function createRows(state, node, cellElementName) {
   const rows = [];
   for (const child of node.children) {
     if (child.type === TYPE_ROW) {
-      rows.push(handleRow(h, child, cellElementName));
+      rows.push(handleRow(state, child, cellElementName));
     }
   }
   return rows;
@@ -81,20 +92,20 @@ function createRows(h, node, cellElementName) {
 export default function gridTableHandler(opts = {}) {
   const { noHeader } = opts;
 
-  return function handleTable(h, node) {
+  return function handleTable(state, node) {
     let headerRows = [];
     let bodyRows = [];
     let footerRows = [];
 
     for (const child of node.children) {
       if (child.type === TYPE_HEADER) {
-        headerRows = createRows(h, child, 'th');
+        headerRows = createRows(state, child, 'th');
       } else if (child.type === TYPE_BODY) {
-        bodyRows = createRows(h, child, 'td');
+        bodyRows = createRows(state, child, 'td');
       } else if (child.type === TYPE_FOOTER) {
-        footerRows = createRows(h, child, 'td');
+        footerRows = createRows(state, child, 'td');
       } else if (child.type === TYPE_ROW) {
-        bodyRows.push(handleRow(h, child, 'td'));
+        bodyRows.push(handleRow(state, child, 'td'));
       }
     }
 
@@ -104,16 +115,34 @@ export default function gridTableHandler(opts = {}) {
     } else {
       inner = [];
       if (headerRows.length) {
-        inner.push(h(null, 'thead', headerRows));
+        inner.push({
+          type: 'element',
+          tagName: 'thead',
+          children: headerRows,
+        });
       }
       if (bodyRows.length) {
-        inner.push(h(null, 'tbody', bodyRows));
+        inner.push({
+          type: 'element',
+          tagName: 'tbody',
+          children: bodyRows,
+        });
       }
       if (footerRows.length) {
-        inner.push(h(null, 'tfoot', footerRows));
+        inner.push({
+          type: 'element',
+          tagName: 'tfoot',
+          children: footerRows,
+        });
       }
     }
 
-    return h(node, 'table', inner);
+    const result = /** @type HastNode */ {
+      type: 'element',
+      tagName: 'table',
+      children: inner,
+    };
+    state.patch(node, result);
+    return result;
   };
 }
