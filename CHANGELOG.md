@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/adobe/mdast-util-gridtables/compare/v3.0.0...v3.0.1) (2023-09-26)
+
+
+### Bug Fixes
+
+* reset bulletLastUsed ([#73](https://github.com/adobe/mdast-util-gridtables/issues/73)) ([052292e](https://github.com/adobe/mdast-util-gridtables/commit/052292ee2d8a19fdda527c2704c523ee87a703b8))
+
 # [3.0.0](https://github.com/adobe/mdast-util-gridtables/compare/v2.0.2...v3.0.0) (2023-09-16)
 
 
