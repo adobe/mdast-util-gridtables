@@ -159,6 +159,9 @@ class Table {
       lineShift: 0,
     }).split('\n');
 
+    // reset bullet state
+    delete state.bulletLastUsed;
+
     subexit();
     exit();
 

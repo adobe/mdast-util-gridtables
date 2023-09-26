@@ -436,6 +436,32 @@ describe('gridtable to md', () => {
     await assertMD(mdast, 'gt-with-align.md');
   });
 
+  it('tables list in 2 rows', async () => {
+    const mdast = root([
+      heading(2, text('Table with list')),
+      gridTable([
+        gtBody([
+          gtRow([
+            gtCell([
+              heading(2, text('Heading 2')),
+              list(false, [
+                listItem(paragraph(text('item 1'))),
+              ]),
+            ]),
+          ]),
+          gtRow([
+            gtCell([
+              list(false, [
+                listItem(paragraph(text('item 2'))),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
+    ]);
+    await assertMD(mdast, 'gt-with-list.md');
+  });
+
   it('tables in tables in tables', async () => {
     const innerTable = gridTable([
       gtHeader([
