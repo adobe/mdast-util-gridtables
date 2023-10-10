@@ -69,6 +69,10 @@ export function lineWrapTextHandler(node, parent, context, safeOptions) {
       if (line.length === 0 && word.match(/^\d+\./)) {
         word = word.replace('.', '\\.');
       }
+      // escape the hyphen if the line-start looks like a list
+      if (line.length === 0 && word === '-') {
+        word = '\\-';
+      }
       line.push(word);
       len += wordLen + 1;
     }

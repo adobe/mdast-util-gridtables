@@ -64,4 +64,8 @@ describe('gridtable from markdown', () => {
   it('text with many refs', async () => {
     await testMD('gt-many-refs');
   });
+
+  it('text with wrapped hyphen', async () => {
+    await testMD('gt-with-hyphen-wrap');
+  });
 });

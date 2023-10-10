@@ -762,6 +762,21 @@ describe('gridtable to md', () => {
     await assertMD(mdast, 'gt-with-list-start.md');
   });
 
+  it('table with unfortunate hyphen wrap', async () => {
+    const mdast = root([
+      heading(2, text('Escape wrapped hyphen')),
+      gridTable([
+        gtBody([
+          gtRow([
+            gtCell(text('Title')),
+            gtCell(text('Lorem ipsum dolor sit, consectetur elit. Vivamus rhoncus - metus tincidunt-990')),
+          ]),
+        ]),
+      ]),
+    ]);
+    await assertMD(mdast, 'gt-with-hyphen-wrap.md');
+  });
+
   /**
    * spot test for edge cases detected in production. disabled by default.
    * for debugging, create a broken.json of the mdast and a broken.md
