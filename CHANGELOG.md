@@ -1,3 +1,10 @@
+## [3.0.2](https://github.com/adobe/mdast-util-gridtables/compare/v3.0.1...v3.0.2) (2023-10-10)
+
+
+### Bug Fixes
+
+* escape hyphen after wrap ([cf4d5a6](https://github.com/adobe/mdast-util-gridtables/commit/cf4d5a6d7f870948751c13d0a263b527ed0d60d7))
+
 ## [3.0.1](https://github.com/adobe/mdast-util-gridtables/compare/v3.0.0...v3.0.1) (2023-09-26)
 
 
