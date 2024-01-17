@@ -4,7 +4,7 @@
 
 ## Status
 [![codecov](https://img.shields.io/codecov/c/github/adobe/mdast-util-gridtables.svg)](https://codecov.io/gh/adobe/mdast-util-gridtables)
-[![CircleCI](https://img.shields.io/circleci/project/github/adobe/mdast-util-gridtables.svg)](https://circleci.com/gh/adobe/mdast-util-gridtables)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/adobe/mdast-util-gridtables/main.yaml)
 [![GitHub license](https://img.shields.io/github/license/adobe/mdast-util-gridtables.svg)](https://github.com/adobe/mdast-util-gridtables/blob/master/LICENSE.txt)
 [![GitHub issues](https://img.shields.io/github/issues/adobe/mdast-util-gridtables.svg)](https://github.com/adobe/mdast-util-gridtables/issues)
 [![LGTM Code Quality Grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/adobe/mdast-util-gridtables.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/adobe/mdast-util-gridtables)
