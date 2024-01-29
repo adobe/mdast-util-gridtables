@@ -1,3 +1,15 @@
+# [4.0.0](https://github.com/adobe/mdast-util-gridtables/compare/v3.0.2...v4.0.0) (2024-01-29)
+
+
+### Bug Fixes
+
+* handle wide code blocks ([#93](https://github.com/adobe/mdast-util-gridtables/issues/93)) ([6a4cbbf](https://github.com/adobe/mdast-util-gridtables/commit/6a4cbbf25fefde451a3d49fc4667b4203876bd4c)), closes [#92](https://github.com/adobe/mdast-util-gridtables/issues/92)
+
+
+### BREAKING CHANGES
+
+* wide code blocks inside cells are line wrapped by inserting a "no-break-here" (U+0083) character.
+
 ## [3.0.2](https://github.com/adobe/mdast-util-gridtables/compare/v3.0.1...v3.0.2) (2023-10-10)
 
 
