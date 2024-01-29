@@ -46,6 +46,12 @@ const CODE = `for (const row of this.rows) {
   }
 }`;
 
+const CODE_WIDE = `"examples": {
+  "0": {
+    "value": "{\\n  \\"events\\": [\\n    {\\n      \\"xdm\\": {\\n        \\"eventType\\": \\"media.adStart\\",\\n        \\"mediaCollection\\": {\\n          \\"advertisingDetails\\": {\\n            \\"friendlyName\\": \\"Ad 1\\",\\n            \\"name\\": \\"/uri-reference/001\\",\\n            \\"length\\": 10,\\n            \\"advertiser\\": \\"Adobe Marketing\\",\\n            \\"campaignID\\": \\"Adobe Analytics\\",\\n            \\"creativeID\\": \\"creativeID\\",\\n            \\"creativeURL\\": \\"https://creativeurl.com\\",\\n            \\"placementID\\": \\"placementID\\",\\n            \\"siteID\\": \\"siteID\\",\\n            \\"podPosition\\": 11,\\n            \\"playerName\\": \\"HTML5 player\\"\\n          },\\n          \\"customMetadata\\": [\\n            {\\n              \\"name\\": \\"myCustomValue3\\",\\n              \\"value\\": \\"c3\\"\\n            },\\n            {\\n              \\"name\\": \\"myCustomValue2\\",\\n              \\"value\\": \\"c2\\"\\n            },\\n            {\\n              \\"name\\": \\"myCustomValue1\\",\\n              \\"value\\": \\"c1\\"\\n            }\\n          ],\\n          \\"sessionID\\": \\"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\\",\\n          \\"playhead\\": 15\\n        },\\n        \\"timestamp\\": \\"2022-03-04T13:38:26+00:00\\"\\n      }\\n    }\\n  ]\\n}"
+  }
+}`;
+
 function brk() {
   return {
     type: 'break',
@@ -556,6 +562,41 @@ describe('gridtable to md', () => {
       ]),
     ]);
     await assertMD(mdast, 'gt-code-with-delim.md');
+  });
+
+  it('table with very wide code block', async () => {
+    const mdast = root([
+      heading(2, text('Table with wide code block')),
+      gridTable([
+        gtRow([
+          gtCell(text('Super Code Example')),
+        ]),
+        gtRow([
+          gtCell(code('json', CODE_WIDE)),
+        ]),
+      ]),
+      gridTable([
+        gtRow([
+          gtCell(heading(1, text('Wide Heading: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.'))),
+        ]),
+        gtRow([
+          gtCell(code('json', CODE_WIDE)),
+        ]),
+      ]),
+    ]);
+    await assertMD(mdast, 'gt-wide.md');
+  });
+
+  it('table with very wide normal text', async () => {
+    const mdast = root([
+      heading(2, text('Table with wide text')),
+      gridTable([
+        gtRow([
+          gtCell(text('Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.')),
+        ]),
+      ]),
+    ]);
+    await assertMD(mdast, 'gt-wide-text.md');
   });
 
   it('unbalanced tables', async () => {

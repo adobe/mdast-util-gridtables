@@ -33,6 +33,10 @@ describe('gridtable from markdown', () => {
     await testMD('gt-large');
   });
 
+  it('wide table', async () => {
+    await testMD('gt-wide');
+  });
+
   it('footer no header table', async () => {
     await testMD('gt-footer-no-header');
   });

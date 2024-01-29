@@ -41,6 +41,10 @@ describe('html from markdown gridtable', () => {
     await testMD2HTML('gt-nbsp');
   });
 
+  it('table with wide code block', async () => {
+    await testMD2HTML('gt-wide');
+  });
+
   it('table with no gtHead', async () => {
     const mdast = {
       type: 'root',

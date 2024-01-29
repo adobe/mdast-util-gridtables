@@ -17,12 +17,19 @@ import {
   TYPE_BODY, TYPE_CELL, TYPE_HEADER, TYPE_FOOTER, TYPE_ROW, TYPE_TABLE,
 } from './types.js';
 
-function unescapeDelimsInCode(tree) {
+function unescapeCode(tree) {
   visit(tree, (node) => {
     if (node.type === 'inlineCode' || node.type === 'code') {
+      // remove escaped pipes and plusses in code
       // eslint-disable-next-line no-param-reassign
       node.value = node.value.replace(/\\([+|])/gm, '$1');
     }
+    if (node.type === 'code') {
+      // remove non-break-here characters
+      // eslint-disable-next-line no-param-reassign
+      node.value = node.value.replace(/\u0083 ?\n/ugm, '');
+    }
+
     return CONTINUE;
   });
 }
@@ -126,7 +133,7 @@ function createExitTable(options) {
       }
 
       // remove escaped pipes and plusses in code
-      unescapeDelimsInCode(tree);
+      unescapeCode(tree);
 
       node.children = tree.children;
       if (colSpan > 1) {

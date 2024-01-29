@@ -567,10 +567,27 @@ function blockCodeWithTable(node, parent, context) {
 
   if (context.stack.includes(TYPE_CELL)) {
     value = value.replace(/[|+]/mg, '\\$&');
-  }
 
+    // break code if wider than lineWidth or 256 chars, but at least 150
+    const lineWidth = Math.min(256, Math.max(150, context.options.lineWidth));
+    if (value.length > lineWidth) {
+      // iterate over lines and break if needed
+      const lines = [];
+      for (let line of value.split('\n')) {
+        while (line.length > lineWidth) {
+          lines.push(`${line.substring(0, lineWidth)}\u0083`);
+          line = line.substring(lineWidth);
+        }
+        lines.push(line);
+      }
+      value = lines.join('\n');
+    }
+  }
   return value;
 }
+
+// don't wrap for peek operations
+blockCodeWithTable.peek = code;
 
 /**
  * Escapes cell delimiters in inline code
