@@ -51,7 +51,7 @@
     "eslint-plugin-header": "3.1.1",
     "eslint-plugin-import": "2.29.1",
     "hast-util-to-html": "9.0.0",
-    "husky": "8.0.3",
+    "husky": "9.0.7",
     "junit-report-builder": "3.1.0",
     "lint-staged": "15.2.0",
     "mdast-builder": "1.1.1",
