@@ -748,6 +748,16 @@ describe('gridtable to md', () => {
           gtCell(text('Test with image with newline in title text')),
           gtCell(paragraph(image('about:blank', 'hello \ntitle'))),
         ]),
+        gtRow([
+          gtCell(text('Test with multiple breaks')),
+          gtCell([
+            text('red'),
+            brk(),
+            strong(text('green')),
+            brk(),
+            text('blue'),
+          ]),
+        ]),
       ]),
     ]);
     imageReferences(mdast);

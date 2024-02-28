@@ -11,9 +11,35 @@
  */
 import { visit, CONTINUE } from 'unist-util-visit';
 
-function isFormat(type) {
-  return type === 'strong' || type === 'emphasis' || type === 'delete';
-}
+export const PHRASING_TYPES = {
+  break: true,
+  delete: true,
+  emphasis: true,
+  footnote: true,
+  footnoteReference: true,
+  image: true,
+  imageReference: true,
+  inlineCode: true,
+  inlineMath: true,
+  link: true,
+  linkReference: true,
+  strong: true,
+  subscript: true,
+  superscript: true,
+  text: true,
+  underline: true,
+};
+
+const COLLAPSIBLE_TYPES = {
+  paragraph: true,
+  delete: true,
+  emphasis: true,
+  inlineCode: true,
+  strong: true,
+  subscript: true,
+  superscript: true,
+  underline: true,
+};
 
 /**
  * Sanitizes text:
@@ -85,7 +111,7 @@ export default function sanitizeBreaks(tree) {
         i -= 1;
       }
     }
-    if (type === 'paragraph' || isFormat(type)) {
+    if (COLLAPSIBLE_TYPES[type]) {
       return children.length === 0;
     }
     return false;
