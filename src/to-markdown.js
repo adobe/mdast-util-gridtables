@@ -14,7 +14,7 @@ import { defaultHandlers } from 'mdast-util-to-markdown';
 import {
   TYPE_BODY, TYPE_CELL, TYPE_HEADER, TYPE_FOOTER, TYPE_ROW, TYPE_TABLE,
 } from './types.js';
-import sanitizeBreaks from './mdast-clean-breaks.js';
+import sanitizeBreaks, { PHRASING_TYPES } from './mdast-clean-breaks.js';
 
 const {
   text: textHandler,
@@ -155,6 +155,14 @@ class Table {
 
     // should probably create a clone and not alter the original mdast
     sanitizeBreaks(cell.tree);
+
+    // if the cell only contains phrasing nodes, wrap with a paragraph
+    if (cell.tree.children.every((n) => PHRASING_TYPES[n.type])) {
+      cell.tree.children = [{
+        type: 'paragraph',
+        children: cell.tree.children,
+      }];
+    }
 
     const lines = state.containerFlow(cell.tree, {
       before: '\n',
