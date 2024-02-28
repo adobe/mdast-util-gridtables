@@ -1,3 +1,10 @@
+## [4.0.1](https://github.com/adobe/mdast-util-gridtables/compare/v4.0.0...v4.0.1) (2024-02-28)
+
+
+### Bug Fixes
+
+* ensure that cell content is properly wrapped from phrasing content only children ([#99](https://github.com/adobe/mdast-util-gridtables/issues/99)) ([b17ea4f](https://github.com/adobe/mdast-util-gridtables/commit/b17ea4f20af4d9ee6dfa2d8d85e1269b7872fbbb))
+
 # [4.0.0](https://github.com/adobe/mdast-util-gridtables/compare/v3.0.2...v4.0.0) (2024-01-29)
 
 
