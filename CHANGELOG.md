@@ -1,3 +1,10 @@
+## [4.0.2](https://github.com/adobe/mdast-util-gridtables/compare/v4.0.1...v4.0.2) (2024-03-19)
+
+
+### Bug Fixes
+
+* add hast-util-select package and md2hast function ([701ae3e](https://github.com/adobe/mdast-util-gridtables/commit/701ae3ef3f55db1056a59f0078a24216cb9234be)), closes [#103](https://github.com/adobe/mdast-util-gridtables/issues/103)
+
 ## [4.0.1](https://github.com/adobe/mdast-util-gridtables/compare/v4.0.0...v4.0.1) (2024-02-28)
 
 
