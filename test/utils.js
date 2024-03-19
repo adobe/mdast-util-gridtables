@@ -71,6 +71,16 @@ export async function assertMD(mdast, fixture) {
   return actual;
 }
 
+export async function md2hast(spec) {
+  const source = await readFile(new URL(`./fixtures/${spec}.md`, import.meta.url), 'utf-8');
+  const mdast = md2mdast(source);
+  return mdast2hast(mdast, {
+    handlers: {
+      [TYPE_TABLE]: mdast2hastGridTablesHandler(),
+    },
+  });
+}
+
 export async function testMD(spec) {
   const source = await readFile(new URL(`./fixtures/${spec}.md`, import.meta.url), 'utf-8');
   let expectedTree;

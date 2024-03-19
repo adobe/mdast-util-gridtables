@@ -50,6 +50,7 @@
     "eslint-import-resolver-exports": "1.0.0-beta.5",
     "eslint-plugin-header": "3.1.1",
     "eslint-plugin-import": "2.29.1",
+    "hast-util-select": "6.0.2",
     "hast-util-to-html": "9.0.0",
     "husky": "9.0.11",
     "junit-report-builder": "3.2.1",

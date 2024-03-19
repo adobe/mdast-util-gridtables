@@ -10,7 +10,9 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-import { testMD2HTML } from './utils.js';
+import assert from 'assert';
+import { selectAll } from 'hast-util-select';
+import { testMD2HTML, md2hast } from './utils.js';
 
 describe('html from markdown gridtable', () => {
   it('simple table', async () => {
@@ -67,5 +69,11 @@ describe('html from markdown gridtable', () => {
 
   it('text with breaks', async () => {
     await testMD2HTML('gt-with-breaks');
+  });
+
+  it('select table', async () => {
+    const hast = await md2hast('gt-simple');
+    const table = selectAll('table', hast);
+    assert.strictEqual(table.length, 1);
   });
 });
