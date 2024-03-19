@@ -64,6 +64,7 @@ function handleRow(state, node, cellElementName) {
     type: 'element',
     tagName: 'tr',
     children: cells,
+    properties: {},
   };
   state.patch(node, result);
   return result;
@@ -119,6 +120,7 @@ export default function gridTableHandler(opts = {}) {
           type: 'element',
           tagName: 'thead',
           children: headerRows,
+          properties: {},
         });
       }
       if (bodyRows.length) {
@@ -126,6 +128,7 @@ export default function gridTableHandler(opts = {}) {
           type: 'element',
           tagName: 'tbody',
           children: bodyRows,
+          properties: {},
         });
       }
       if (footerRows.length) {
@@ -133,6 +136,7 @@ export default function gridTableHandler(opts = {}) {
           type: 'element',
           tagName: 'tfoot',
           children: footerRows,
+          properties: {},
         });
       }
     }
@@ -141,6 +145,7 @@ export default function gridTableHandler(opts = {}) {
       type: 'element',
       tagName: 'table',
       children: inner,
+      properties: {},
     };
     state.patch(node, result);
     return result;
