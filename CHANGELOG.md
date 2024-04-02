@@ -1,3 +1,10 @@
+## [4.0.4](https://github.com/adobe/mdast-util-gridtables/compare/v4.0.3...v4.0.4) (2024-04-02)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/micromark-extension-gridtables to v2.0.2 ([#109](https://github.com/adobe/mdast-util-gridtables/issues/109)) ([829f39c](https://github.com/adobe/mdast-util-gridtables/commit/829f39c91c228a1b2641b363a601743d7aba528d))
+
 ## [4.0.3](https://github.com/adobe/mdast-util-gridtables/compare/v4.0.2...v4.0.3) (2024-04-02)
 
 
