@@ -828,6 +828,26 @@ describe('gridtable to md', () => {
     await assertMD(mdast, 'gt-with-hyphen-wrap.md');
   });
 
+  it('table in list item', async () => {
+    const mdast = root([
+      heading(1, text('Table after List')),
+      list(false, [
+        listItem([
+          text('List Item'),
+          gridTable([
+            gtBody([
+              gtRow([
+                gtCell(text('Inner Text')),
+              ]),
+            ]),
+          ]),
+          text('More Text'),
+        ]),
+      ]),
+    ]);
+    await assertMD(mdast, 'gt-table-and-list.md');
+  });
+
   /**
    * spot test for edge cases detected in production. disabled by default.
    * for debugging, create a broken.json of the mdast and a broken.md
