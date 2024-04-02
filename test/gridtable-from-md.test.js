@@ -72,4 +72,8 @@ describe('gridtable from markdown', () => {
   it('text with wrapped hyphen', async () => {
     await testMD('gt-with-hyphen-wrap');
   });
+
+  it('table and list', async () => {
+    await testMD('gt-table-and-list');
+  });
 });
