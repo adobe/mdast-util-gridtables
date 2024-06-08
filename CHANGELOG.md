@@ -1,3 +1,10 @@
+## [4.0.6](https://github.com/adobe/mdast-util-gridtables/compare/v4.0.5...v4.0.6) (2024-06-08)
+
+
+### Bug Fixes
+
+* **deps:** update dependency mdast-util-to-hast to v13.2.0 ([#117](https://github.com/adobe/mdast-util-gridtables/issues/117)) ([66f0bd1](https://github.com/adobe/mdast-util-gridtables/commit/66f0bd1faf297511ebdc6478e0cb35a8e504c82f))
+
 ## [4.0.5](https://github.com/adobe/mdast-util-gridtables/compare/v4.0.4...v4.0.5) (2024-06-01)
 
 
