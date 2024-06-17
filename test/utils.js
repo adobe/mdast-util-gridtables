@@ -61,7 +61,6 @@ export function md2mdast(md) {
   return fromMarkdown(md, options);
 }
 
-// eslint-disable-next-line import/prefer-default-export
 export async function assertMD(mdast, fixture) {
   // console.log(require('unist-util-inspect')(mdast));
   const expected = await readFile(new URL(`./fixtures/${fixture}`, import.meta.url), 'utf-8');
@@ -87,7 +86,7 @@ export async function testMD(spec) {
   try {
     expectedTree = await readFile(new URL(`./fixtures/${spec}.txt`, import.meta.url), 'utf-8');
     expectedTree = expectedTree.trim();
-  } catch (e) {
+  } catch {
     // ignore
   }
 
@@ -117,7 +116,7 @@ export async function testMD2HTML(spec, mdast) {
   let expectedLean;
   try {
     expectedLean = await readFile(new URL(`./fixtures/${spec}.lean.html`, import.meta.url), 'utf-8');
-  } catch (e) {
+  } catch {
     // ignore
   }
 
