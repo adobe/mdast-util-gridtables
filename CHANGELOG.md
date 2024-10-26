@@ -1,3 +1,10 @@
+## [4.0.7](https://github.com/adobe/mdast-util-gridtables/compare/v4.0.6...v4.0.7) (2024-10-26)
+
+
+### Bug Fixes
+
+* **deps:** update external fixes ([#142](https://github.com/adobe/mdast-util-gridtables/issues/142)) ([bd90675](https://github.com/adobe/mdast-util-gridtables/commit/bd90675bd3fff012c8e0d4bf0cc4d133df8a8b15))
+
 ## [4.0.6](https://github.com/adobe/mdast-util-gridtables/compare/v4.0.5...v4.0.6) (2024-06-08)
 
 
