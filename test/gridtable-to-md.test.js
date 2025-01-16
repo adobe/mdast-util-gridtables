@@ -52,6 +52,8 @@ const CODE_WIDE = `"examples": {
   }
 }`;
 
+const CODE_WIDE_ESCAPE_CHAR = 'const test = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever +since the 1500s, when an unknown printer took";';
+
 function brk() {
   return {
     type: 'break',
@@ -573,6 +575,14 @@ describe('gridtable to md', () => {
         ]),
         gtRow([
           gtCell(code('json', CODE_WIDE)),
+        ]),
+      ]),
+      gridTable([
+        gtRow([
+          gtCell(text('Super Code Example')),
+        ]),
+        gtRow([
+          gtCell(code('js', CODE_WIDE_ESCAPE_CHAR)),
         ]),
       ]),
       gridTable([
