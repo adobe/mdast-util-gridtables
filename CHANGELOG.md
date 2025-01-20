@@ -1,3 +1,10 @@
+## [4.0.9](https://github.com/adobe/mdast-util-gridtables/compare/v4.0.8...v4.0.9) (2025-01-20)
+
+
+### Bug Fixes
+
+* avoid breaking escaped characters ([#156](https://github.com/adobe/mdast-util-gridtables/issues/156)) ([2bfcae9](https://github.com/adobe/mdast-util-gridtables/commit/2bfcae978aba06e37daff2a90084b54e279beb42)), closes [#154](https://github.com/adobe/mdast-util-gridtables/issues/154)
+
 ## [4.0.8](https://github.com/adobe/mdast-util-gridtables/compare/v4.0.7...v4.0.8) (2024-11-09)
 
 
