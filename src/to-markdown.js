@@ -583,8 +583,13 @@ function blockCodeWithTable(node, parent, context) {
       const lines = [];
       for (let line of value.split('\n')) {
         while (line.length > lineWidth) {
-          lines.push(`${line.substring(0, lineWidth)}\u0083`);
-          line = line.substring(lineWidth);
+          // avoid splitting escaped characters
+          let len = lineWidth;
+          if (line[len - 1] === '\\') {
+            len -= 1;
+          }
+          lines.push(`${line.substring(0, len)}\u0083`);
+          line = line.substring(len);
         }
         lines.push(line);
       }
