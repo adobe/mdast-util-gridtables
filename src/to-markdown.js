@@ -227,6 +227,8 @@ class Table {
         if (cell.tree) {
           realNumCols = Math.max(realNumCols, x + 1);
         }
+        // ensure rowspan is not too large
+        cell.rowSpan = Math.min(cell.rowSpan, this.rows.length - y);
         if (cell.rowSpan > 1) {
           // insert colspan amount of null cells below
           for (let i = 1; i < cell.rowSpan; i += 1) {
