@@ -370,7 +370,7 @@ describe('gridtable to md', () => {
           cell(text('B7'), 1, 1),
         ]),
         gtRow([
-          cell(text('AB8'), 1, 2),
+          cell(text('AB8'), 2, 2),
         ]),
       ]),
       heading(2, text('Table with overlapping spans')),
