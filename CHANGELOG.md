@@ -1,3 +1,10 @@
+## [4.0.10](https://github.com/adobe/mdast-util-gridtables/compare/v4.0.9...v4.0.10) (2025-02-25)
+
+
+### Bug Fixes
+
+* ensure that rowspan is bound to table limits ([#166](https://github.com/adobe/mdast-util-gridtables/issues/166)) ([3195c5d](https://github.com/adobe/mdast-util-gridtables/commit/3195c5d89e1f697100f009c90d746b745f07df96))
+
 ## [4.0.9](https://github.com/adobe/mdast-util-gridtables/compare/v4.0.8...v4.0.9) (2025-01-20)
 
 
