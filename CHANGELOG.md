@@ -1,3 +1,10 @@
+## [4.0.12](https://github.com/adobe/mdast-util-gridtables/compare/v4.0.11...v4.0.12) (2025-05-07)
+
+
+### Bug Fixes
+
+* escape `>` only in wrapped line beginnings ([#176](https://github.com/adobe/mdast-util-gridtables/issues/176)) ([9fff223](https://github.com/adobe/mdast-util-gridtables/commit/9fff22348406670f84b0399c0ca428c7aafe8169))
+
 ## [4.0.11](https://github.com/adobe/mdast-util-gridtables/compare/v4.0.10...v4.0.11) (2025-03-08)
 
 
