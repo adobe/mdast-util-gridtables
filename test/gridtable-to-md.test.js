@@ -838,6 +838,21 @@ describe('gridtable to md', () => {
     await assertMD(mdast, 'gt-with-hyphen-wrap.md');
   });
 
+  it('table with unfortunate greater symbol wrap', async () => {
+    const mdast = root([
+      heading(2, text('Escape wrapped greater symbol')),
+      gridTable([
+        gtBody([
+          gtRow([
+            gtCell(text('Title')),
+            gtCell(text('Lorem ipsum dolor sit, consectetur elit. Vivamus rhoncus >95% metus tincidunt-990')),
+          ]),
+        ]),
+      ]),
+    ]);
+    await assertMD(mdast, 'gt-with-greater-wrap.md');
+  });
+
   it('table in list item', async () => {
     const mdast = root([
       heading(1, text('Table after List')),
