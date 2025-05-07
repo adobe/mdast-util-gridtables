@@ -73,6 +73,10 @@ export function lineWrapTextHandler(node, parent, context, safeOptions) {
       if (line.length === 0 && word === '-') {
         word = '\\-';
       }
+      // escape the greater symbol if a wrapped line start looks like a blockquote
+      if (lines.length && line.length === 0 && word.startsWith('>')) {
+        word = `\\>${word.substring(1)}`;
+      }
       line.push(word);
       len += wordLen + 1;
     }
