@@ -38,6 +38,17 @@ Adobe Stock Senior Director, Content, Sarah Casillas echoes Rivas’ sentiments.
 |                                                          | **green**\                                               |
 |                                                          | blue                                                     |
 +----------------------------------------------------------+----------------------------------------------------------+
+| ![https://example.com/ \| the success blog][image1]      |                                                          |
+|                                                          |                                                          |
+| \                                                        |                                                          |
+|                                                          |                                                          |
+|                                                          |                                                          |
+| Saw a&#x20;                                              |                                                          |
+|                                                          |                                                          |
+| **10x productivity lift**                                |                                                          |
+|                                                          |                                                          |
+| &#x20;for its 1,600 designers and a 26x increase in      |                                                          |
++----------------------------------------------------------+----------------------------------------------------------+
 
 [image0]: https://dummyimage.com/300
 
