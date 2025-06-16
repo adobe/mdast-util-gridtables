@@ -62,7 +62,6 @@ export function md2mdast(md) {
 }
 
 export async function assertMD(mdast, fixture) {
-  console.log(inspect(mdast, 'mdast', { colors: true }));
   const expected = await readFile(new URL(`./fixtures/${fixture}`, import.meta.url), 'utf-8');
   const actual = mdast2md(mdast);
   // console.log(actual);
@@ -92,7 +91,7 @@ export async function testMD(spec) {
 
   const actual = md2mdast(source);
   removePositions(actual);
-  const actualTree = inspect(actual);
+  const actualTree = inspect(actual, { color: false });
   // eslint-disable-next-line no-console
   // console.log(actualTree);
 

@@ -71,7 +71,7 @@ describe('html from markdown gridtable', () => {
     await testMD2HTML('gt-with-breaks');
   });
 
-  it('more test with breaks', async () => {
+  it('lonely breaks', async () => {
     await testMD2HTML('gt-with-breaks2');
   });
 

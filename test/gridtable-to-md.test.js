@@ -774,28 +774,44 @@ describe('gridtable to md', () => {
     await assertMD(mdast, 'gt-with-breaks.md');
   });
 
-  it('more with breaks', async () => {
+  it('lonely breaks', async () => {
     const mdast = root([
       heading(2, text('Text with breaks')),
       gridTable([
         gtRow([
-          gtCell(text('Icon Block')),
-        ]),
-        gtRow([
           gtCell([
             paragraph([
-              paragraph(image('about:blank')),
+              image('https://example.com/', null, 'https://example.com/'),
             ]),
-            brk(),
-            text('Saw a '),
-            strong(text('10x productivity lift')),
-            text('.'),
+            paragraph([
+              text('\\'),
+            ]),
+            paragraph([
+              text('single'),
+            ]),
+            paragraph([
+              text('\\'),
+            ]),
+            paragraph([
+              text('double'),
+            ]),
+            paragraph([
+              text('\\'),
+              brk(),
+            ]),
+            paragraph([
+              text('triple'),
+            ]),
+            paragraph([
+              text('keep'),
+              brk(),
+            ]),
           ]),
         ]),
       ]),
     ]);
     imageReferences(mdast);
-    await assertMD(mdast, 'gt-with-breaks2.md');
+    await assertMD(mdast, 'gt-with-breaks2-gen.md');
   });
 
   it('code with tabs', async () => {

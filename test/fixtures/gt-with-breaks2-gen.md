@@ -2,7 +2,8 @@
 
 +---------------------------------+
 | ![https://example.com/][image0] |
-| \                               |
+|                                 |
+| \\                              |
 |                                 |
 | single                          |
 |                                 |
@@ -10,11 +11,11 @@
 |                                 |
 | double                          |
 |                                 |
-| \\\                             |
+| \\                              |
 |                                 |
 | triple                          |
 |                                 |
-| keep\                           |
+| keep                            |
 +---------------------------------+
 
-[image0]: about:blank
+[image0]: https://example.com/
