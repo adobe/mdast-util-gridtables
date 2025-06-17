@@ -71,6 +71,10 @@ describe('html from markdown gridtable', () => {
     await testMD2HTML('gt-with-breaks');
   });
 
+  it('lonely breaks', async () => {
+    await testMD2HTML('gt-with-breaks2');
+  });
+
   it('select table', async () => {
     const hast = await md2hast('gt-simple');
     const table = selectAll('table', hast);

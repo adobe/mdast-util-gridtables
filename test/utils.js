@@ -14,7 +14,7 @@
 import assert from 'assert';
 import { lstat, readFile } from 'fs/promises';
 import { visit, CONTINUE } from 'unist-util-visit';
-import { inspectNoColor as inspect } from 'unist-util-inspect';
+import { inspect } from 'unist-util-inspect';
 import { toMarkdown } from 'mdast-util-to-markdown';
 import { fromMarkdown } from 'mdast-util-from-markdown';
 import { gridTables, TYPE_TABLE } from '@adobe/micromark-extension-gridtables';
@@ -62,7 +62,6 @@ export function md2mdast(md) {
 }
 
 export async function assertMD(mdast, fixture) {
-  // console.log(require('unist-util-inspect')(mdast));
   const expected = await readFile(new URL(`./fixtures/${fixture}`, import.meta.url), 'utf-8');
   const actual = mdast2md(mdast);
   // console.log(actual);
@@ -92,7 +91,7 @@ export async function testMD(spec) {
 
   const actual = md2mdast(source);
   removePositions(actual);
-  const actualTree = inspect(actual);
+  const actualTree = inspect(actual, { color: false });
   // eslint-disable-next-line no-console
   // console.log(actualTree);
 
