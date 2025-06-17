@@ -1,3 +1,10 @@
+## [4.0.13](https://github.com/adobe/mdast-util-gridtables/compare/v4.0.12...v4.0.13) (2025-06-17)
+
+
+### Bug Fixes
+
+* remove trailing backslash before empty lines ([1e2cc57](https://github.com/adobe/mdast-util-gridtables/commit/1e2cc57f35feecc3a7444eaac5593bcfe691c732))
+
 ## [4.0.12](https://github.com/adobe/mdast-util-gridtables/compare/v4.0.11...v4.0.12) (2025-05-07)
 
 
