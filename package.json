@@ -34,7 +34,7 @@
     "reporter-options": "configFile=.mocha-multi.json"
   },
   "dependencies": {
-    "@adobe/micromark-extension-gridtables": "^2.0.0",
+    "@adobe/micromark-extension-gridtables": "^2.0.4",
     "mdast-util-from-markdown": "2.0.2",
     "mdast-util-to-hast": "13.2.0",
     "mdast-util-to-markdown": "2.1.2",
