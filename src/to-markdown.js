@@ -229,7 +229,7 @@ class Table {
       }
       for (let y = 0; y < this.rows.length; y += 1) {
         const row = this.rows[y];
-        const cell = row.cells[x] || {};
+        const cell = row.cells[x] || { rowSpan: 1, colSpan: 1, tree: null };
         if (cell.tree) {
           realNumCols = Math.max(realNumCols, x + 1);
         }
