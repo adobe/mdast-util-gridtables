@@ -1,3 +1,10 @@
+## [4.0.14](https://github.com/adobe/mdast-util-gridtables/compare/v4.0.13...v4.0.14) (2025-10-09)
+
+
+### Bug Fixes
+
+* rowspan issues ([#199](https://github.com/adobe/mdast-util-gridtables/issues/199)) ([bf7396e](https://github.com/adobe/mdast-util-gridtables/commit/bf7396e4fe1160b6542c37163f9595e09acca213))
+
 ## [4.0.13](https://github.com/adobe/mdast-util-gridtables/compare/v4.0.12...v4.0.13) (2025-06-17)
 
 
