@@ -215,19 +215,21 @@ class Table {
   toMarkdown(context) {
     // populate the matrix with the rowspans and compute max width
     // (the empty cells for the colspans are already created during insert).
+    // travers by column, in order to fill in the rowspans correctly
+    const maxCols = this.rows.reduce((acc, row) => Math.max(acc, row.cells.length), 0);
     let realNumCols = 0;
     const cols = [];
-    for (let y = 0; y < this.rows.length; y += 1) {
-      const row = this.rows[y];
-      for (let x = 0; x < row.cells.length; x += 1) {
-        let col = cols[x];
-        if (!col) {
-          col = {
-            width: 3,
-          };
-          cols[x] = col;
-        }
-        const cell = row.cells[x];
+    for (let x = 0; x < maxCols; x += 1) {
+      let col = cols[x];
+      if (!col) {
+        col = {
+          width: 3,
+        };
+        cols[x] = col;
+      }
+      for (let y = 0; y < this.rows.length; y += 1) {
+        const row = this.rows[y];
+        const cell = row.cells[x] || {};
         if (cell.tree) {
           realNumCols = Math.max(realNumCols, x + 1);
         }
