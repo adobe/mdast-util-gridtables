@@ -53,6 +53,10 @@ describe('gridtable from markdown', () => {
     await testMD('gt-tables-in-tables');
   });
 
+  it('table with rowspan', async () => {
+    await testMD('table-two-rowspans');
+  });
+
   it('table with align', async () => {
     await testMD('gt-with-align');
   });
