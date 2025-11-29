@@ -36,7 +36,7 @@
   "dependencies": {
     "@adobe/micromark-extension-gridtables": "^2.0.4",
     "mdast-util-from-markdown": "2.0.2",
-    "mdast-util-to-hast": "13.2.0",
+    "mdast-util-to-hast": "13.2.1",
     "mdast-util-to-markdown": "2.1.2",
     "unist-util-visit": "5.0.0"
   },
