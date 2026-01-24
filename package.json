@@ -38,7 +38,7 @@
     "mdast-util-from-markdown": "2.0.2",
     "mdast-util-to-hast": "13.2.1",
     "mdast-util-to-markdown": "2.1.2",
-    "unist-util-visit": "5.0.0"
+    "unist-util-visit": "5.1.0"
   },
   "devDependencies": {
     "@semantic-release/changelog": "6.0.3",
