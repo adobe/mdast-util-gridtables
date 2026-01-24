@@ -1,3 +1,10 @@
+## [4.0.16](https://github.com/adobe/mdast-util-gridtables/compare/v4.0.15...v4.0.16) (2026-01-24)
+
+
+### Bug Fixes
+
+* **deps:** update dependency unist-util-visit to v5.1.0 ([#212](https://github.com/adobe/mdast-util-gridtables/issues/212)) ([a431dbc](https://github.com/adobe/mdast-util-gridtables/commit/a431dbce40ee98c52eed1249fce2c707953cd400))
+
 ## [4.0.15](https://github.com/adobe/mdast-util-gridtables/compare/v4.0.14...v4.0.15) (2025-11-29)
 
 
