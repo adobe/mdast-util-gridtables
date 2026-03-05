@@ -309,6 +309,40 @@ describe('gridtable to md', () => {
     await assertMD(mdast, 'gt-large.md');
   });
 
+  // Verifies that the grid separator between a row with individual cells and a
+  // subsequent row with a colspan correctly renders '+' at column boundaries.
+  // Without the fix, the separator was a continuous line (e.g. '+---------+')
+  // instead of showing the column boundary (e.g. '+----+----+').
+  it('rowspan followed by colspan draws correct grid boundary', async () => {
+    function cell(children, rowSpan, colSpan) {
+      const node = gtCell(children);
+      if (rowSpan) {
+        node.rowSpan = rowSpan;
+      }
+      if (colSpan) {
+        node.colSpan = colSpan;
+      }
+      return node;
+    }
+
+    const mdast = root([
+      heading(2, text('Rowspan followed by colspan')),
+      gridTable([
+        gtRow([
+          cell(text('Col1'), 2),
+          cell(text('Col2')),
+        ]),
+        gtRow([
+          cell(text('B')),
+        ]),
+        gtRow([
+          cell(text('CD'), 0, 2),
+        ]),
+      ]),
+    ]);
+    await assertMD(mdast, 'gt-rowspan-colspan-boundary.md');
+  });
+
   it('table spans converts correctly', async () => {
     function cell(children, rowSpan, colSpan) {
       const node = gtCell(children);

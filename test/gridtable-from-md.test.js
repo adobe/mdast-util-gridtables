@@ -57,6 +57,10 @@ describe('gridtable from markdown', () => {
     await testMD('table-two-rowspans');
   });
 
+  it('rowspan followed by colspan roundtrips correctly', async () => {
+    await testMD('gt-rowspan-colspan-boundary');
+  });
+
   it('table with align', async () => {
     await testMD('gt-with-align');
   });
