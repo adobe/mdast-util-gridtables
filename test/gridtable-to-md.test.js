@@ -330,7 +330,7 @@ describe('gridtable to md', () => {
       gridTable([
         gtRow([
           cell(text('A12'), 2),
-          cell(text('Col2')),
+          cell(text('B1')),
         ]),
         gtRow([
           cell(text('B')),
