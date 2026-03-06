@@ -329,7 +329,7 @@ describe('gridtable to md', () => {
       heading(2, text('Rowspan followed by colspan')),
       gridTable([
         gtRow([
-          cell(text('Col1'), 2),
+          cell(text('A12'), 2),
           cell(text('Col2')),
         ]),
         gtRow([
