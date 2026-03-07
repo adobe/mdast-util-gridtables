@@ -422,13 +422,42 @@ class Table {
           pendingAlign = align[cell.align];
           pendingVAlign = align[cell.valign];
         } else if (cell.linked) {
+          const hadPendingDashes = pendingGrid > 0;
           commitGridLine();
+          const boundary = hadPendingDashes ? '+' : '|';
           const width = spanWidth(cols, x, cell.linked);
           const text = cell.linked.lines.shift() || '';
-          grid.push(`| ${text.padEnd(width - 3, ' ')} `);
+          grid.push(`${boundary} ${text.padEnd(width - 3, ' ')} `);
           x += cell.linked.colSpan - 1;
         } else {
-          pendingGrid += col.width;
+          // Check if this empty cell is part of an aligned colspan.
+          // Aligned colspans need their grid line uninterrupted for proper
+          // alignment marker rendering.
+          let inAlignedColspan = false;
+          for (let xx = x - 1; xx >= 0; xx -= 1) {
+            const c = row.cells[xx];
+            if (c.tree) {
+              if (c.colSpan > x - xx && (c.align || c.valign)) {
+                inAlignedColspan = true;
+              }
+              break;
+            }
+            if (c.linked) break;
+          }
+
+          if (inAlignedColspan) {
+            pendingGrid += col.width;
+          } else {
+            const prevRow = y > 0 ? this.rows[y - 1] : null;
+            const prevRowCell = prevRow?.cells[x];
+            if (prevRowCell?.tree || prevRowCell?.linked) {
+              commitGridLine();
+              grid.push('+');
+              pendingGrid = col.width - 1;
+            } else {
+              pendingGrid += col.width;
+            }
+          }
         }
         prevCell = cell;
       }
