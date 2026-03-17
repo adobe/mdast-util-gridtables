@@ -343,6 +343,26 @@ describe('gridtable to md', () => {
     await assertMD(mdast, 'gt-rowspan-colspan-boundary.md');
   });
 
+  // Verifies that a colspan of 3 or more correctly scans past intermediate
+  // colspan cells (neither tree nor linked) when computing grid boundaries.
+  it('colspan of 3 draws correct grid boundary', async () => {
+    const mdast = root([
+      gridTable([
+        gtRow([
+          gtCell(text('A'), '', '', 1, 3),
+          gtCell(text('B')),
+        ]),
+        gtRow([
+          gtCell(text('C')),
+          gtCell(text('D')),
+          gtCell(text('E')),
+          gtCell(text('F')),
+        ]),
+      ]),
+    ]);
+    await assertMD(mdast, 'gt-colspan3-boundary.md');
+  });
+
   it('table spans converts correctly', async () => {
     function cell(children, rowSpan, colSpan) {
       const node = gtCell(children);

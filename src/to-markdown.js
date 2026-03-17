@@ -436,13 +436,12 @@ class Table {
           let inAlignedColspan = false;
           for (let xx = x - 1; xx >= 0; xx -= 1) {
             const c = row.cells[xx];
-            if (c.tree) {
-              if (c.colSpan > x - xx && (c.align || c.valign)) {
+            if (c.tree || c.linked) {
+              if (c.tree && c.colSpan > x - xx && (c.align || c.valign)) {
                 inAlignedColspan = true;
               }
               break;
             }
-            if (c.linked) break;
           }
 
           if (inAlignedColspan) {
