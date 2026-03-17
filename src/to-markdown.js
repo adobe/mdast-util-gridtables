@@ -2,7 +2,7 @@
  * Copyright 2022 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
- * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ * of the License at https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software distributed under
  * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
@@ -435,9 +435,9 @@ class Table {
           // alignment marker rendering.
           let inAlignedColspan = false;
           for (let xx = x - 1; xx >= 0; xx -= 1) {
-            const c = row.cells[xx];
-            if (c.tree || c.linked) {
-              if (c.tree && c.colSpan > x - xx && (c.align || c.valign)) {
+            const bc = row.cells[xx];
+            if (bc.tree || bc.linked) {
+              if (bc.tree && bc.colSpan > x - xx && (bc.align || bc.valign)) {
                 inAlignedColspan = true;
               }
               break;
