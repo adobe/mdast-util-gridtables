@@ -1,3 +1,10 @@
+## [4.0.18](https://github.com/adobe/mdast-util-gridtables/compare/v4.0.17...v4.0.18) (2026-03-19)
+
+
+### Bug Fixes
+
+* render correct grid boundary when rowspan meets colspan ([d33ecb0](https://github.com/adobe/mdast-util-gridtables/commit/d33ecb06c9fda5240a2f85cbfa8e31a45fd02af0))
+
 ## [4.0.17](https://github.com/adobe/mdast-util-gridtables/compare/v4.0.16...v4.0.17) (2026-02-21)
 
 
