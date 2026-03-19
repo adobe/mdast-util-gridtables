@@ -2,15 +2,13 @@
  * Copyright 2022 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
- * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ * of the License at https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software distributed under
  * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
-/* eslint-env mocha */
 import { readFile } from 'fs/promises';
 import {
   code, blockquote, heading, image, paragraph, root, text, inlineCode, tableCell, tableRow,
@@ -307,6 +305,60 @@ describe('gridtable to md', () => {
     ]);
     // sanitizeTextAndFormats(mdast);
     await assertMD(mdast, 'gt-large.md');
+  });
+
+  // Verifies that the grid separator between a row with individual cells and a
+  // subsequent row with a colspan correctly renders '+' at column boundaries.
+  // Without the fix, the separator was a continuous line (e.g. '+---------+')
+  // instead of showing the column boundary (e.g. '+----+----+').
+  it('rowspan followed by colspan draws correct grid boundary', async () => {
+    function cell(children, rowSpan, colSpan) {
+      const node = gtCell(children);
+      if (rowSpan) {
+        node.rowSpan = rowSpan;
+      }
+      if (colSpan) {
+        node.colSpan = colSpan;
+      }
+      return node;
+    }
+
+    const mdast = root([
+      heading(2, text('Rowspan followed by colspan')),
+      gridTable([
+        gtRow([
+          cell(text('A12'), 2),
+          cell(text('B1')),
+        ]),
+        gtRow([
+          cell(text('B2')),
+        ]),
+        gtRow([
+          cell(text('AB3'), 0, 2),
+        ]),
+      ]),
+    ]);
+    await assertMD(mdast, 'gt-rowspan-colspan-boundary.md');
+  });
+
+  // Verifies that a colspan of 3 or more correctly scans past intermediate
+  // colspan cells (neither tree nor linked) when computing grid boundaries.
+  it('colspan of 3 draws correct grid boundary', async () => {
+    const mdast = root([
+      gridTable([
+        gtRow([
+          gtCell(text('A'), '', '', 1, 3),
+          gtCell(text('B')),
+        ]),
+        gtRow([
+          gtCell(text('C')),
+          gtCell(text('D')),
+          gtCell(text('E')),
+          gtCell(text('F')),
+        ]),
+      ]),
+    ]);
+    await assertMD(mdast, 'gt-colspan3-boundary.md');
   });
 
   it('table spans converts correctly', async () => {

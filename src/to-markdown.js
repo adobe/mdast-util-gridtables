@@ -2,7 +2,7 @@
  * Copyright 2022 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
- * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ * of the License at https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software distributed under
  * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
@@ -422,13 +422,41 @@ class Table {
           pendingAlign = align[cell.align];
           pendingVAlign = align[cell.valign];
         } else if (cell.linked) {
+          const hadPendingDashes = pendingGrid > 0;
           commitGridLine();
+          const boundary = hadPendingDashes ? '+' : '|';
           const width = spanWidth(cols, x, cell.linked);
           const text = cell.linked.lines.shift() || '';
-          grid.push(`| ${text.padEnd(width - 3, ' ')} `);
+          grid.push(`${boundary} ${text.padEnd(width - 3, ' ')} `);
           x += cell.linked.colSpan - 1;
         } else {
-          pendingGrid += col.width;
+          // Check if this empty cell is part of an aligned colspan.
+          // Aligned colspans need their grid line uninterrupted for proper
+          // alignment marker rendering.
+          let inAlignedColspan = false;
+          for (let xx = x - 1; xx >= 0; xx -= 1) {
+            const bc = row.cells[xx];
+            if (bc.tree || bc.linked) {
+              if (bc.tree && bc.colSpan > x - xx && (bc.align || bc.valign)) {
+                inAlignedColspan = true;
+              }
+              break;
+            }
+          }
+
+          if (inAlignedColspan) {
+            pendingGrid += col.width;
+          } else {
+            const prevRow = y > 0 ? this.rows[y - 1] : null;
+            const prevRowCell = prevRow?.cells[x];
+            if (prevRowCell?.tree || prevRowCell?.linked) {
+              commitGridLine();
+              grid.push('+');
+              pendingGrid = col.width - 1;
+            } else {
+              pendingGrid += col.width;
+            }
+          }
         }
         prevCell = cell;
       }
