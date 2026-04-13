@@ -965,6 +965,30 @@ describe('gridtable to md', () => {
     await assertMD(mdast, 'gt-table-and-list.md');
   });
 
+  it('does not crash when rowspan splice pushes a colspan cell beyond column bounds', async () => {
+    // +-----+-----+ During toMarkdown, cell_A's rowSpan=2 splices a linked cell into row 1
+    // |  A  |  B  | at position 0, pushing cell_C to position 1.
+    // | rs2 |     |
+    // +-----+-----+ cell_C still has colSpan=2, so at x=1 the render loop
+    // |     C     | tries cols[1+1] = cols[2], which is undefined (only cols 0 and 1 exist).
+    // |   cs2     |
+    // +-----------+
+    const mdast = root([
+      gridTable([
+        gtBody([
+          gtRow([
+            gtCell(text('A'), null, null, 2, 1),
+            gtCell(text('B')),
+          ]),
+          gtRow([
+            gtCell(text('C'), null, null, 1, 2),
+          ]),
+        ]),
+      ]),
+    ]);
+    await assertMD(mdast, 'gt-rowspan-colspan-bounds.md');
+  });
+
   /**
    * spot test for edge cases detected in production. disabled by default.
    * for debugging, create a broken.json of the mdast and a broken.md

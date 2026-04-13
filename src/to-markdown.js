@@ -273,10 +273,20 @@ class Table {
 
     const numCols = cols.length;
 
-    // add empty cells if needed
+    // add empty cells if needed and clamp colspans that exceed column bounds
+    // (rowspan splicing can push cells right, leaving their colSpan too large)
     for (const row of this.rows) {
+      if (row.cells.length > numCols) {
+        row.cells.length = numCols;
+      }
       for (let i = row.cells.length; i < numCols; i += 1) {
         row.cells.push({ tree: { type: 'root', children: [] }, colSpan: 1, rowSpan: 1 });
+      }
+      for (let x = 0; x < numCols; x += 1) {
+        const cell = row.cells[x];
+        if (cell.colSpan && x + cell.colSpan > numCols) {
+          cell.colSpan = numCols - x;
+        }
       }
     }
 
