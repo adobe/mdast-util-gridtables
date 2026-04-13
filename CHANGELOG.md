@@ -1,3 +1,10 @@
+## [4.0.19](https://github.com/adobe/mdast-util-gridtables/compare/v4.0.18...v4.0.19) (2026-04-13)
+
+
+### Bug Fixes
+
+* clamp colspan when rowspan splice pushes cells beyond column bounds ([6312ce1](https://github.com/adobe/mdast-util-gridtables/commit/6312ce1c176681b08feba111f5328f9c321d6301))
+
 ## [4.0.18](https://github.com/adobe/mdast-util-gridtables/compare/v4.0.17...v4.0.18) (2026-03-19)
 
 
