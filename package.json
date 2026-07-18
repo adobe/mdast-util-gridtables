@@ -52,12 +52,12 @@
     "hast-util-to-html": "9.0.5",
     "husky": "9.1.7",
     "junit-report-builder": "5.1.2",
-    "lint-staged": "17.0.8",
+    "lint-staged": "17.1.0",
     "mdast-builder": "1.1.1",
     "mocha": "11.7.6",
     "mocha-multi-reporters": "1.5.1",
     "rehype-format": "5.0.1",
-    "semantic-release": "25.0.6",
+    "semantic-release": "25.0.8",
     "unist-util-inspect": "8.1.0"
   },
   "lint-staged": {
