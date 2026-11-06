@@ -37,8 +37,8 @@
     "@adobe/micromark-extension-gridtables": "^2.0.4",
     "mdast-util-from-markdown": "2.1.0",
     "mdast-util-to-hast": "13.2.1",
-    "mdast-util-to-markdown": "2.2.0",
-    "unist-util-visit": "5.1.0"
+    "mdast-util-to-markdown": "2.2.3",
+    "unist-util-visit": "5.2.0"
   },
   "devDependencies": {
     "@semantic-release/changelog": "7.0.0",
@@ -46,10 +46,10 @@
     "@semantic-release/npm": "13.2.0",
     "@stylistic/eslint-plugin-js": "4.4.1",
     "c8": "12.0.0",
-    "eslint": "10.13.0",
-    "globals": "17.13.0",
+    "eslint": "10.14.0",
+    "globals": "17.14.0",
     "hast-util-select": "6.0.4",
-    "hast-util-to-html": "9.0.5",
+    "hast-util-to-html": "9.0.6",
     "husky": "9.1.7",
     "junit-report-builder": "5.1.2",
     "lint-staged": "17.6.0",
