@@ -1,3 +1,10 @@
+## [4.0.21](https://github.com/adobe/mdast-util-gridtables/compare/v4.0.20...v4.0.21) (2026-11-11)
+
+
+### Bug Fixes
+
+* preserve long code fence info strings in grid tables ([#250](https://github.com/adobe/mdast-util-gridtables/issues/250)) ([#251](https://github.com/adobe/mdast-util-gridtables/issues/251)) ([a68432d](https://github.com/adobe/mdast-util-gridtables/commit/a68432d40680aca9b0baefa44f5b3664873ea4fa))
+
 ## [4.0.20](https://github.com/adobe/mdast-util-gridtables/compare/v4.0.19...v4.0.20) (2026-10-03)
 
 
