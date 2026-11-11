@@ -627,8 +627,13 @@ function blockCodeWithTable(node, parent, context) {
     if (value.length > lineWidth) {
       // iterate over lines and break if needed
       const lines = [];
-      for (let line of value.split('\n')) {
-        while (line.length > lineWidth) {
+      const codeLines = value.split('\n');
+      const fenced = /^[`~]/.test(value);
+      for (let i = 0; i < codeLines.length; i += 1) {
+        let line = codeLines[i];
+        // Fence lines must stay intact: only code values can rejoin wrapped lines.
+        const fenceLine = fenced && (i === 0 || i === codeLines.length - 1);
+        while (!fenceLine && line.length > lineWidth) {
           // avoid splitting escaped characters
           let len = lineWidth;
           if (line[len - 1] === '\\') {

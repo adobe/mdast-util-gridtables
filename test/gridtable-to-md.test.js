@@ -10,11 +10,14 @@
  * governing permissions and limitations under the License.
  */
 import { readFile } from 'fs/promises';
+import assert from 'assert';
+import { toMarkdown } from 'mdast-util-to-markdown';
 import {
   code, blockquote, heading, image, paragraph, root, text, inlineCode, tableCell, tableRow,
   list as originalList, listItem as originalListItem, strong, emphasis,
 } from 'mdast-builder';
-import { assertMD } from './utils.js';
+import { assertMD, mdast2md, md2mdast } from './utils.js';
+import { gridTablesToMarkdown } from '../src/index.js';
 
 import imageReferences from './mdast-image-references.js';
 
@@ -617,6 +620,88 @@ describe('gridtable to md', () => {
     ]);
     await assertMD(mdast, 'gt-code-with-delim.md');
   });
+
+  for (const length of [148, 149, 1024]) {
+    it(`roundtrips code with a ${length}-character info string`, () => {
+      const lang = `js-data-example="${'a'.repeat(length - 18)}"`;
+      const value = 'const a = 1;';
+      const mdast = root([
+        code(lang, value),
+        gridTable([
+          gtBody([
+            gtRow([
+              gtCell(code(lang, value)),
+            ]),
+          ]),
+        ]),
+      ]);
+      const actual = md2mdast(mdast2md(mdast));
+      const outside = actual.children[0];
+      const inside = actual.children[1].children[0].children[0].children[0].children[0];
+      for (const node of [outside, inside]) {
+        assert.strictEqual(node.type, 'code');
+        assert.strictEqual(node.lang, lang);
+        assert.strictEqual(node.value, value);
+      }
+    });
+  }
+
+  it('roundtrips long info with wrapped code and cell delimiters', () => {
+    const lang = `js-data-example="${'a'.repeat(1000)}"`;
+    const value = `${'a'.repeat(255)}+|\\path\\file\n${'b'.repeat(255)}\\+\\|\nconst a = 1;`;
+    const mdast = root([
+      gridTable([
+        gtBody([
+          gtRow([
+            gtCell(code(lang, value)),
+            gtCell(paragraph(text(LARUM_L)), 'right', 'bottom'),
+          ]),
+        ]),
+      ]),
+    ]);
+    const md = mdast2md(mdast);
+    assert.ok(md.includes('\u0083'));
+    const lines = md.trimEnd().split('\n');
+    assert.ok(lines.every((line) => line.length === lines[0].length));
+    const row = md2mdast(md).children[0].children[0].children[0];
+    const actual = row.children[0].children[0];
+    assert.strictEqual(actual.lang, lang);
+    assert.strictEqual(actual.value, value);
+    assert.strictEqual(row.children[1].align, 'right');
+    assert.strictEqual(row.children[1].valign, 'bottom');
+    assert.strictEqual(row.children[1].children[0].children[0].value.replace(/\n/g, ' '), LARUM_L);
+  });
+
+  for (const [name, node, options] of [
+    ['tilde fences and metadata', {
+      ...code('a'.repeat(1024), 'a + b | c;\\path'),
+      meta: `data-example="${'b'.repeat(1024)}"`,
+    }, { fence: '~' }],
+    ['long fences', code('js', '`'.repeat(300)), {}],
+    ['indented code', code(null, `${'a'.repeat(60)}+|\\path\n`.repeat(3).trimEnd()), { fences: false }],
+  ]) {
+    it(`roundtrips code with ${name}`, () => {
+      const mdast = root([
+        node,
+        gridTable([
+          gtBody([
+            gtRow([
+              gtCell([paragraph(text('Code:')), { ...node }]),
+            ]),
+          ]),
+        ]),
+      ]);
+      const md = toMarkdown(mdast, { ...options, extensions: [gridTablesToMarkdown()] });
+      const actual = md2mdast(md);
+      const inside = actual.children[1].children[0].children[0].children[0].children[1];
+      for (const result of [actual.children[0], inside]) {
+        assert.strictEqual(result.type, 'code');
+        assert.strictEqual(result.lang, node.lang);
+        assert.strictEqual(result.meta, node.meta || null);
+        assert.strictEqual(result.value, node.value);
+      }
+    });
+  }
 
   it('table with very wide code block', async () => {
     const mdast = root([
