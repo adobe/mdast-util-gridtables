@@ -9,14 +9,16 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-import { readFile } from 'fs/promises';
 import assert from 'assert';
+import { readFile } from 'fs/promises';
 import { toMarkdown } from 'mdast-util-to-markdown';
 import {
   code, blockquote, heading, image, paragraph, root, text, inlineCode, tableCell, tableRow,
   list as originalList, listItem as originalListItem, strong, emphasis,
 } from 'mdast-builder';
-import { assertMD, mdast2md, md2mdast } from './utils.js';
+import {
+  assertMD, mdast2md, md2mdast, removePositions,
+} from './utils.js';
 import { gridTablesToMarkdown } from '../src/index.js';
 
 import imageReferences from './mdast-image-references.js';
@@ -119,6 +121,14 @@ function list(ordered, kids) {
   const li = originalList(ordered, kids);
   li.spread = false;
   return li;
+}
+
+function assertRoundTrip(tree) {
+  const expected = JSON.parse(JSON.stringify(tree));
+  const markdown = mdast2md(tree);
+  assert.deepStrictEqual(removePositions(md2mdast(markdown)), expected);
+  assert.strictEqual(mdast2md(md2mdast(markdown)), markdown);
+  return markdown;
 }
 
 describe('gridtable to md', () => {
@@ -604,6 +614,62 @@ describe('gridtable to md', () => {
       ]),
     ]);
     await assertMD(mdast, 'gt-tables-in-tables.md');
+  });
+
+  it('avoids parent column markers inside a nested colspan', () => {
+    const inner = gridTable([
+      gtBody([gtRow([gtCell(paragraph(text('c'))), gtCell(paragraph(text('d')))])]),
+    ]);
+    assertRoundTrip(root([gridTable([
+      gtBody([
+        gtRow([gtCell(paragraph(text('a'))), gtCell(paragraph(text('b')))]),
+        gtRow([gtCell(inner, '', '', undefined, 2)]),
+      ]),
+    ])]));
+  });
+
+  it('avoids column markers in nested colspans after a preceding cell', () => {
+    const inner = gridTable([
+      gtBody([gtRow([gtCell(paragraph(text('c'))), gtCell(paragraph(text('d')))])]),
+    ]);
+    assertRoundTrip(root([gridTable([gtBody([
+      gtRow(['a', 'b', 'c', 'd'].map((value) => gtCell(paragraph(text(value))))),
+      gtRow([
+        gtCell(paragraph(text('lead'))),
+        gtCell(inner, '', '', undefined, 2),
+        gtCell(paragraph(text('tail'))),
+      ]),
+    ])])]));
+  });
+
+  it('avoids ancestor markers through eight levels of nested tables and escaped content', () => {
+    let nested = gridTable([gtBody([
+      gtRow([gtCell([
+        paragraph([text('literal + | +---+ \\\\ '), inlineCode('a\\b|c+d')]),
+        { ...code('text', '+---+---+\n| c | d |\n+---+---+'), meta: null },
+      ])]),
+    ])]);
+    for (let level = 0; level < 7; level += 1) {
+      nested = gridTable([gtBody([
+        gtRow([gtCell(paragraph(text(`a${level}`))), gtCell(paragraph(text(`b${level}`)))]),
+        gtRow([gtCell(nested, '', '', undefined, 2)]),
+      ])]);
+    }
+    assertRoundTrip(root([nested]));
+  });
+
+  it('keeps sibling tables safe across multiple column boundaries and rowspans', () => {
+    const inner = (value) => gridTable([gtBody([
+      gtRow([gtCell(paragraph(text(value))), gtCell(paragraph(text('end')))]),
+    ])]);
+    assertRoundTrip(root([gridTable([gtBody([
+      gtRow(['a', 'b', 'c', 'd'].map((value) => gtCell(paragraph(text(value))))),
+      gtRow([
+        gtCell([inner('short'), inner('longer value')], 'center', 'middle', 2, 3),
+        gtCell(paragraph(text('e'))),
+      ]),
+      gtRow([gtCell(paragraph(text('f')))]),
+    ])])]));
   });
 
   it('table with delimiters in code', async () => {
