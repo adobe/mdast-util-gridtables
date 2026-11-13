@@ -34,6 +34,10 @@ describe('html from markdown gridtable', () => {
     await testMD2HTML('gt-tables-in-tables');
   });
 
+  it('nested table with collision-free column boundaries', async () => {
+    await testMD2HTML('gt-nested-column-boundary');
+  });
+
   it('table with align', async () => {
     await testMD2HTML('gt-with-align');
   });

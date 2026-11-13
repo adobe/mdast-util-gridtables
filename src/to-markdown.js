@@ -42,6 +42,50 @@ function spanWidth(cols, idx, cell) {
   return width;
 }
 
+function avoidColumnCollisions(rows, cols) {
+  const spanningCells = [];
+  for (const row of rows) {
+    for (let column = 0; column < row.cells.length; column += 1) {
+      const cell = row.cells[column];
+      if (cell.tree && cell.colSpan > 1) {
+        const markers = new Set();
+        for (const line of cell.lines) {
+          for (let i = 0; i < line.length; i += 1) {
+            if (line[i] === '\\' && ['\\', '+', '|'].includes(line[i + 1])) {
+              i += 1;
+            } else if (line[i] === '+' || line[i] === '|') {
+              markers.add(i);
+            }
+          }
+        }
+        if (markers.size) {
+          spanningCells.push({ column, end: column + cell.colSpan, markers });
+        }
+      }
+    }
+  }
+
+  const positions = [0];
+  for (let column = 0; column < cols.length - 1; column += 1) {
+    let position = positions[column] + cols[column].width;
+    const forbidden = new Set();
+    for (const cell of spanningCells) {
+      if (cell.column <= column && cell.end > column + 1) {
+        for (const marker of cell.markers) {
+          forbidden.add(positions[cell.column] + 2 + marker);
+        }
+      }
+    }
+    // Cell text starts two characters after its left border ("| "). Widen only
+    // the column before this boundary, leaving previously safe boundaries fixed.
+    while (forbidden.has(position)) {
+      position += 1;
+    }
+    cols[column].width = position - positions[column];
+    positions.push(position);
+  }
+}
+
 export function lineWrapTextHandler(node, parent, context, safeOptions) {
   const textNode = {
     ...node,
@@ -346,6 +390,11 @@ class Table {
         }
       }
     }
+
+    // Child tables are already rendered, including all deeper descendants.
+    // Each ancestor chooses safe boundaries after its children, so no column
+    // stack, child re-rendering, or escaping of structural delimiters is needed.
+    avoidColumnCollisions(this.rows, cols);
 
     // distribute row spans
     for (let y = 0; y < this.rows.length; y += 1) {
