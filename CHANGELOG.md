@@ -1,3 +1,10 @@
+## [4.0.23](https://github.com/adobe/mdast-util-gridtables/compare/v4.0.22...v4.0.23) (2026-11-13)
+
+
+### Bug Fixes
+
+* avoid ancestor column collisions in serialized grid tables ([#255](https://github.com/adobe/mdast-util-gridtables/issues/255)) ([f92edf2](https://github.com/adobe/mdast-util-gridtables/commit/f92edf2aa4460c67bfe66918e5692ab566ae701d)), closes [#253](https://github.com/adobe/mdast-util-gridtables/issues/253)
+
 ## [4.0.22](https://github.com/adobe/mdast-util-gridtables/compare/v4.0.21...v4.0.22) (2026-11-11)
 
 
