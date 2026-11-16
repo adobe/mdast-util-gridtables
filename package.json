@@ -57,7 +57,7 @@
     "mocha": "12.0.3",
     "mocha-multi-reporters": "1.5.2",
     "rehype-format": "5.0.1",
-    "semantic-release": "25.0.9",
+    "semantic-release": "26.0.1",
     "unist-util-inspect": "8.1.0"
   },
   "lint-staged": {
